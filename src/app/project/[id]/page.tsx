@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef, use } from "react";
+import { motion } from "framer-motion";
+import { use, useState } from "react";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import { projects } from "@/lib/projects";
@@ -14,58 +14,31 @@ export default function ProjectPage({
 }) {
   const resolvedParams = use(params);
   const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [project, setProject] = useState<(typeof projects)[0] | undefined>();
-
-  useEffect(() => {
-    const foundProject = projects.find(
-      (p) => p.id === Number.parseInt(resolvedParams.id)
-    );
-    if (foundProject) {
-      setProject(foundProject);
-    } else {
-      router.push("/");
-    }
-  }, [resolvedParams.id, router]);
-
-  // const handleClickOutside = (e: React.MouseEvent) => {
-  //   if (
-  //     containerRef.current &&
-  //     !containerRef.current.contains(e.target as Node)
-  //   ) {
-  //     router.push("/");
-  //   }
-  // };
+  const [project] = useState(
+    projects.find((p) => p.id === Number.parseInt(resolvedParams.id))
+  );
 
   const handleClickOutside = (e: React.MouseEvent) => {
-    if (
-      containerRef.current &&
-      !containerRef.current.contains(e.target as Node)
-    ) {
-      window.location.href = "/"; // Instantly navigates to the home page without loading animation
+    const target = e.target as HTMLElement;
+    if (target.classList.contains("project-overlay")) {
+      router.push("/");
     }
   };
 
   if (!project) return null;
 
   return (
-    <AnimatePresence>
+    <div
+      className="fixed inset-0 z-50 project-overlay bg-black/90"
+      onClick={handleClickOutside}
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-        onClick={handleClickOutside}
+        className="min-h-screen overflow-y-auto"
       >
-        <motion.div
-          ref={containerRef}
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ type: "spring", duration: 0.5 }}
-          className="max-h-[90vh] w-full max-w-7xl overflow-y-auto rounded-2xl bg-black/95 p-6 md:p-8 scrollbar-hide"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
           <div className="relative mb-8 aspect-video overflow-hidden rounded-xl">
             <ReactPlayer
               url={project.videoUrl}
@@ -152,30 +125,6 @@ export default function ProjectPage({
                   ))}
                 </div>
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="grid gap-4 sm:grid-cols-2"
-              >
-                {[1, 2, 3, 4].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="relative aspect-video overflow-hidden rounded-lg"
-                  >
-                    <Image
-                      src={`/placeholder.svg?height=400&width=600&text=Project-Image-${
-                        i + 1
-                      }`}
-                      alt={`Project image ${i + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
             </div>
 
             {/* Right Column - Credits & Testimonial */}
@@ -218,7 +167,7 @@ export default function ProjectPage({
                 </h2>
                 <blockquote className="space-y-4">
                   <p className="text-lg italic text-white/80">
-                    "{project.testimonial.text}"
+                    {project.testimonial.text}
                   </p>
                   <footer className="text-white/60">
                     <p className="font-medium text-white">
@@ -230,8 +179,8 @@ export default function ProjectPage({
               </motion.div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </motion.div>
-    </AnimatePresence>
+    </div>
   );
 }

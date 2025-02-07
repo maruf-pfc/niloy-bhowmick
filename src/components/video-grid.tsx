@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
@@ -15,23 +15,23 @@ const categories = [
 
 export function VideoGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [hoveredVideo, setHoveredVideo] = useState<number | null>(null);
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement }>({});
 
   // Function to stop all videos except the currently hovered one
-  const stopAllVideosExcept = (exceptId: number | null) => {
+  const stopAllVideosExcept = useCallback((exceptId: number | null) => {
     Object.entries(videoRefs.current).forEach(([id, videoElement]) => {
       if (Number(id) !== exceptId && videoElement) {
         videoElement.pause();
         videoElement.currentTime = 0;
       }
     });
-  };
+  }, []);
 
   // Cleanup function to stop all videos when component unmounts
   useEffect(() => {
+    const currentVideoRefs = videoRefs.current;
     return () => {
-      Object.values(videoRefs.current).forEach((video) => {
+      Object.values(currentVideoRefs).forEach((video) => {
         if (video) {
           video.pause();
           video.currentTime = 0;
@@ -54,9 +54,6 @@ export function VideoGrid() {
       case 1: // Small item top right of large
       case 2: // Small item below top right
         return "col-span-1 row-span-1";
-      // case 3: // Tall item
-        // return "col-span-1 row-span-2";
-      // case 4: // Wide item
       case 3: // Regular items
       case 4:
         return "col-span-1 row-span-1";
@@ -102,7 +99,6 @@ export function VideoGrid() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
               onMouseEnter={() => {
-                setHoveredVideo(project.id);
                 stopAllVideosExcept(project.id);
                 const video = videoRefs.current[project.id];
                 if (video) {
@@ -113,7 +109,6 @@ export function VideoGrid() {
                 }
               }}
               onMouseLeave={() => {
-                setHoveredVideo(null);
                 stopAllVideosExcept(null);
               }}
             >

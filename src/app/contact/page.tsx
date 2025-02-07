@@ -1,46 +1,35 @@
-"use client";
+"use client"
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Instagram,
-  Twitter,
-  Youtube,
-  Clock,
-  Users,
-  Video,
-} from "lucide-react";
-import { sendEmail } from "@/lib/send-email";
+import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react"
+import { Mail, Phone, MapPin, Instagram, Twitter, Youtube, Clock, Users, Video } from "lucide-react"
+import { sendEmail } from "@/lib/send-email"
+import type React from "react" // Added import for React
 
 const services = [
   {
     icon: Video,
     title: "Video Editing",
-    description:
-      "Professional video editing with attention to detail and creative storytelling.",
+    description: "Professional video editing with attention to detail and creative storytelling.",
   },
   {
     icon: Users,
     title: "Collaboration",
-    description:
-      "Work closely with clients to achieve their vision and exceed expectations.",
+    description: "Work closely with clients to achieve their vision and exceed expectations.",
   },
   {
     icon: Clock,
     title: "Quick Turnaround",
     description: "Fast delivery without compromising on quality.",
   },
-];
+]
 
 const achievements = [
   { number: "100+", label: "Projects Completed" },
   { number: "50+", label: "Happy Clients" },
   { number: "5+", label: "Years Experience" },
   { number: "10+", label: "Awards Won" },
-];
+]
 
 const faqs = [
   {
@@ -55,58 +44,39 @@ const faqs = [
   },
   {
     question: "Do you offer revisions?",
-    answer:
-      "Yes, I offer up to 3 rounds of revisions to ensure you're completely satisfied with the final product.",
+    answer: "Yes, I offer up to 3 rounds of revisions to ensure you're completely satisfied with the final product.",
   },
-];
+]
 
 export default function ContactPage() {
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
 
   useEffect(() => {
     if (formStatus === "success" || formStatus === "error") {
       const timer = setTimeout(() => {
-        setFormStatus("idle");
-      }, 3000);
-      return () => clearTimeout(timer);
+        setFormStatus("idle")
+      }, 3000)
+      return () => clearTimeout(timer)
     }
-  }, [formStatus]);
-
-  //   async function handleSubmit(formData: FormData) {
-  //     setFormStatus("submitting");
-  //     const result = await sendEmail(formData);
-  //     setFormStatus(result.success ? "success" : "error");
-  //   }
+  }, [formStatus])
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault(); // Prevent default form submission
-
-    setFormStatus("submitting");
-
-    const formData = new FormData(event.currentTarget); // Extract form data from form element
-
-    const result = await sendEmail(formData); // Send the form data
-
-    setFormStatus(result.success ? "success" : "error");
+    event.preventDefault()
+    setFormStatus("submitting")
+    const formData = new FormData(event.currentTarget)
+    const result = await sendEmail(formData)
+    setFormStatus(result.success ? "success" : "error")
   }
 
   return (
     <div className="min-h-screen bg-black pt-24">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16 text-center"
-        >
-          <h1 className="mb-4 text-5xl font-bold text-white">
-            Let's Create Something Amazing
-          </h1>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16 text-center">
+          <h1 className="mb-4 text-5xl font-bold text-white">Let&apos;s Create Something Amazing</h1>
           <p className="mx-auto max-w-2xl text-lg text-white/60">
-            I'm always excited to collaborate on new projects and bring creative
-            visions to life through the power of video editing.
+            I&apos;m always excited to collaborate on new projects and bring creative visions to life through the power
+            of video editing.
           </p>
         </motion.div>
 
@@ -117,9 +87,7 @@ export default function ContactPage() {
           transition={{ delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="mb-8 text-center text-3xl font-bold text-white">
-            Services Offered
-          </h2>
+          <h2 className="mb-8 text-center text-3xl font-bold text-white">Services Offered</h2>
           <div className="grid gap-8 md:grid-cols-3">
             {services.map((service, index) => (
               <motion.div
@@ -130,9 +98,7 @@ export default function ContactPage() {
                 className="rounded-xl bg-white/5 p-6 backdrop-blur"
               >
                 <service.icon className="mb-4 h-8 w-8 text-white" />
-                <h3 className="mb-2 text-xl font-bold text-white">
-                  {service.title}
-                </h3>
+                <h3 className="mb-2 text-xl font-bold text-white">{service.title}</h3>
                 <p className="text-white/60">{service.description}</p>
               </motion.div>
             ))}
@@ -155,9 +121,7 @@ export default function ContactPage() {
                 transition={{ delay: 0.5 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-4xl font-bold text-white">
-                  {achievement.number}
-                </div>
+                <div className="text-4xl font-bold text-white">{achievement.number}</div>
                 <div className="text-white/60">{achievement.label}</div>
               </motion.div>
             ))}
@@ -174,12 +138,9 @@ export default function ContactPage() {
             className="space-y-8"
           >
             <div>
-              <h2 className="mb-6 text-3xl font-bold text-white">
-                Get in Touch
-              </h2>
+              <h2 className="mb-6 text-3xl font-bold text-white">Get in Touch</h2>
               <p className="text-lg text-white/60">
-                Ready to start your next project? Contact me for a free
-                consultation.
+                Ready to start your next project? Contact me for a free consultation.
               </p>
             </div>
 
@@ -236,20 +197,10 @@ export default function ContactPage() {
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 }}
-          >
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 rounded-2xl bg-white/5 p-8 backdrop-blur"
-            >
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 }}>
+            <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl bg-white/5 p-8 backdrop-blur">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-white"
-                >
+                <label htmlFor="name" className="block text-sm font-medium text-white">
                   Name
                 </label>
                 <input
@@ -263,10 +214,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-white"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-white">
                   Email
                 </label>
                 <input
@@ -280,10 +228,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="projectType"
-                  className="block text-sm font-medium text-white"
-                >
+                <label htmlFor="projectType" className="block text-sm font-medium text-white">
                   Project Type
                 </label>
                 <select
@@ -301,10 +246,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-white"
-                >
+                <label htmlFor="message" className="block text-sm font-medium text-white">
                   Message
                 </label>
                 <textarea
@@ -361,9 +303,7 @@ export default function ContactPage() {
           transition={{ delay: 0.8 }}
           className="mb-16"
         >
-          <h2 className="mb-8 text-center text-3xl font-bold text-white">
-            Frequently Asked Questions
-          </h2>
+          <h2 className="mb-8 text-center text-3xl font-bold text-white">Frequently Asked Questions</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {faqs.map((faq, index) => (
               <motion.div
@@ -373,9 +313,7 @@ export default function ContactPage() {
                 transition={{ delay: 0.9 + index * 0.1 }}
                 className="rounded-xl bg-white/5 p-6 backdrop-blur"
               >
-                <h3 className="mb-2 text-xl font-bold text-white">
-                  {faq.question}
-                </h3>
+                <h3 className="mb-2 text-xl font-bold text-white">{faq.question}</h3>
                 <p className="text-white/60">{faq.answer}</p>
               </motion.div>
             ))}
@@ -383,5 +321,6 @@ export default function ContactPage() {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }
+
