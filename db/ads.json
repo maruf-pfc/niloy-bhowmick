@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ad-1",
+    "title": "Product Launch",
+    "description": "Exciting product launch advertisement",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Tech Innovations",
+    "date": "2023-11-15",
+    "tags": ["ad", "product", "launch"]
+  },
+  {
+    "id": "ad-2",
+    "title": "Holiday Sale",
+    "description": "Festive holiday sale promotion",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Retail Chain",
+    "date": "2023-12-01",
+    "tags": ["ad", "sale", "holiday"]
+  },
+  {
+    "id": "ad-3",
+    "title": "App Promo",
+    "description": "Engaging mobile app promotional video",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "App Developer",
+    "date": "2023-10-20",
+    "tags": ["ad", "app", "mobile"]
+  },
+  {
+    "id": "ad-4",
+    "title": "Restaurant Showcase",
+    "description": "Appetizing restaurant promotional video",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Gourmet Dining",
+    "date": "2023-09-05",
+    "tags": ["ad", "restaurant", "food"]
+  },
+  {
+    "id": "ad-5",
+    "title": "Service Introduction",
+    "description": "Professional service introduction video",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Consulting Firm",
+    "date": "2023-08-15",
+    "tags": ["ad", "service", "business"]
+  },
+  {
+    "id": "ad-6",
+    "title": "Event Promotion",
+    "description": "Exciting event promotional video",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Event Organizer",
+    "date": "2023-07-22",
+    "tags": ["ad", "event", "promotion"]
+  }
+]

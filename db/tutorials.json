@@ -1,0 +1,68 @@
+[
+  {
+    "id": "tutorial-1",
+    "title": "After Effects Basics",
+    "description": "Introduction to After Effects for beginners",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Creative Academy",
+    "date": "2023-11-10",
+    "tags": ["tutorial", "after effects", "beginner"]
+  },
+  {
+    "id": "tutorial-2",
+    "title": "Advanced Color Grading",
+    "description": "Professional color grading techniques in Premiere Pro",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Edit Masters",
+    "date": "2023-10-05",
+    "tags": ["tutorial", "premiere pro", "color grading"]
+  },
+  {
+    "id": "tutorial-3",
+    "title": "Motion Graphics Workflow",
+    "description": "Efficient workflow for creating motion graphics",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Motion Design School",
+    "date": "2023-09-15",
+    "tags": ["tutorial", "motion graphics", "workflow"]
+  },
+  {
+    "id": "tutorial-4",
+    "title": "Sound Design for Video",
+    "description": "Creating impactful sound design for your videos",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Audio Mastery",
+    "date": "2023-08-22",
+    "tags": ["tutorial", "sound design", "audio"]
+  },
+  {
+    "id": "tutorial-5",
+    "title": "Cinematic Transitions",
+    "description": "Creating smooth and professional video transitions",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Film School Online",
+    "date": "2023-07-18",
+    "tags": ["tutorial", "transitions", "cinematic"]
+  },
+  {
+    "id": "tutorial-6",
+    "title": "Visual Effects Compositing",
+    "description": "Basics of VFX compositing in After Effects",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "VFX Academy",
+    "date": "2023-12-05",
+    "tags": ["tutorial", "visual effects", "compositing"]
+  }
+]

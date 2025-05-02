@@ -1,0 +1,68 @@
+[
+  {
+    "id": "intro-1",
+    "title": "Tech Startup Intro",
+    "description": "Modern and sleek intro animation for a tech startup",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "TechCorp Inc.",
+    "date": "2023-10-15",
+    "tags": ["intro", "corporate", "tech"]
+  },
+  {
+    "id": "outro-1",
+    "title": "Gaming Channel Outro",
+    "description": "Energetic outro for a popular gaming YouTube channel",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "GameMaster",
+    "date": "2023-09-22",
+    "tags": ["outro", "gaming", "youtube"]
+  },
+  {
+    "id": "intro-2",
+    "title": "Podcast Intro Sequence",
+    "description": "Clean and professional intro for a business podcast",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Business Insights Podcast",
+    "date": "2023-11-05",
+    "tags": ["intro", "podcast", "business"]
+  },
+  {
+    "id": "outro-2",
+    "title": "Educational Course Outro",
+    "description": "Professional outro for an online educational platform",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "LearnHub Academy",
+    "date": "2023-08-18",
+    "tags": ["outro", "education", "e-learning"]
+  },
+  {
+    "id": "intro-3",
+    "title": "Travel Vlog Intro",
+    "description": "Dynamic and colorful intro for a travel vlog series",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Wanderlust Adventures",
+    "date": "2023-07-30",
+    "tags": ["intro", "travel", "vlog"]
+  },
+  {
+    "id": "outro-3",
+    "title": "Corporate Presentation Outro",
+    "description": "Elegant outro for corporate presentations and videos",
+    "thumbnail": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-gdE823ctvc3UdAeSAVZUawClhdLk05.png",
+    "videoUrl": "https://youtu.be/8jhC9xnJGYU?si=Rus3cxE79sZJe4Pa",
+    "externalUrl": "https://youtube.com/watch?v=8jhC9xnJGYU",
+    "client": "Global Enterprises Ltd.",
+    "date": "2023-12-01",
+    "tags": ["outro", "corporate", "presentation"]
+  }
+]
