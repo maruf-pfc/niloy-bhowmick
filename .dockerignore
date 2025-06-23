@@ -1,0 +1,35 @@
+# Node modules
+node_modules
+.pnp
+.pnp.js
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output
+.next
+out
+dist
+coverage
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode
+.idea
+*.swp
+
+# Git
+.git
+.gitignore
