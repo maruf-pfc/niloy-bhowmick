@@ -1,16 +1,25 @@
-import { videosData } from "@/db/videos";
-import { Video } from "@/types/videos";
+import { videoProjectsData } from "@/db/data";
+import { VideoProject } from "@/types/videos";
 
 // Helper functions
-export function getVideos(): Video[] {
-  return videosData;
+export function getVideoProjects(): VideoProject[] {
+  return videoProjectsData;
 }
 
-export function getVideoById(id: number): Video | undefined {
-  return videosData.find((video) => video.id === id);
+export function getVideoProjectById(id: number): VideoProject | undefined {
+  return videoProjectsData.find((project) => project.id === id);
 }
 
-export function getVideosByCategory(category?: string): Video[] {
-  if (!category) return videosData;
-  return videosData.filter((video) => video.category === category);
+export function getVideoProjectsByCategory(category?: string): VideoProject[] {
+  if (!category || category === "All") return videoProjectsData;
+  return videoProjectsData.filter((project) => project.category === category);
+}
+
+export function getFeaturedProjects(limit = 6): VideoProject[] {
+  return videoProjectsData
+    .sort(
+      (a, b) =>
+        new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime()
+    )
+    .slice(0, limit);
 }

@@ -1,35 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Youtube, Mail, Heart } from "lucide-react";
+import {
+  Linkedin,
+  Twitter,
+  Youtube,
+  Mail,
+  Heart,
+  Instagram,
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
     {
-      name: "GitHub",
-      href: "https://github.com/maruf-pfc",
-      icon: Github,
+      name: "YouTube",
+      href: "https://youtube.com/@niloy",
+      icon: Youtube,
+    },
+    {
+      name: "Instagram",
+      href: "https://instagram.com/niloy",
+      icon: Instagram,
     },
     {
       name: "LinkedIn",
-      href: "https://linkedin.com/in/mdmarufsarker",
+      href: "https://linkedin.com/in/niloy",
       icon: Linkedin,
     },
     {
       name: "Twitter",
-      href: "https://twitter.com/md_marufsarker",
+      href: "https://twitter.com/niloy",
       icon: Twitter,
     },
     {
-      name: "YouTube",
-      href: "https://youtube.com/@maruf_sarker",
-      icon: Youtube,
-    },
-    {
       name: "Email",
-      href: "mailto:mdmarufsarker.mms@gmail.com",
+      href: "mailto:contact.niloybhowmick@gmail.com",
       icon: Mail,
     },
   ];
@@ -42,7 +49,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold">Niloy Bhowmick</h3>
             <p className="text-gray-400 text-sm">
-              Passionate Video Editor and Motion Graphics Designer with a deep love for storytelling through visuals.
+              Video Editor and Motion Graphics Designer passionate about
+              creating visual stories with style, precision, and cinematic
+              magic.
             </p>
           </div>
 
@@ -60,7 +69,13 @@ export default function Footer() {
                 href="/about"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                About Me
+                About
+              </Link>
+              <Link
+                href="/services"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Services
               </Link>
               <Link
                 href="/contact"
@@ -96,7 +111,8 @@ export default function Footer() {
 
         <div className="border-t border-gray-700/50 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm flex items-center justify-center gap-1">
-            Made with <Heart className="text-red-500" size={16} /> by Niloy Bhowmick © {currentYear}
+            Made with <Heart className="text-red-500" size={16} /> by Niloy
+            Bhowmick © {currentYear}
           </p>
         </div>
       </div>

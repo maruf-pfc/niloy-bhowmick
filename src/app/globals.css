@@ -235,3 +235,21 @@ button {
   border-color: rgba(59, 130, 246, 0.3);
   border-top-color: #3b82f6;
 }
+
+/* Override any white backgrounds */
+.bg-white {
+  background-color: rgba(30, 41, 59, 0.8) !important;
+}
+
+.text-black {
+  color: #f8fafc !important;
+}
+
+/* Ensure proper contrast for all elements */
+.text-gray-900 {
+  color: #f8fafc !important;
+}
+
+.bg-gray-50 {
+  background-color: rgba(51, 65, 85, 0.3) !important;
+}

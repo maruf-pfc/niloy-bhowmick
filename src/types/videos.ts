@@ -1,11 +1,16 @@
-export interface Video {
+export interface VideoProject {
   id: number;
-  title: string;
-  description: string;
+  video_title: string;
+  video_description: string;
   tags: string[];
-  img: string;
+  cover_image: string;
   publish_date: string;
-  live_url?: string;
-  source_code: string;
+  client_name: string;
+  client_image: string;
+  client_feedback: string;
+  video_link: string;
+  project_images: string[];
   category: string;
+  duration?: string;
+  software_used?: string[];
 }

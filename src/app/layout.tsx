@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     siteName: "Niloy Bhowmick Portfolio",
     images: [
       {
-        url: "/niloybhowmick.png", // make sure this exists in your public folder
+        url: "/niloybhowmick.png",
         width: 1200,
         height: 630,
         alt: "Niloy Bhowmick - Video Editor",
