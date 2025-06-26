@@ -41,13 +41,13 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
             {/* <Film className="h-6 w-6 text-white mr-2" /> */}
-            <Image
+            {/* <Image
               src="/logo-transparent.png"
               width={32}
               height={32}
               alt="Niloy Bhowmick"
               className="object-cover"
-            />
+            /> */}
             <span className="nunito.className text-3xl font-bold">
               itsNiloy
             </span>

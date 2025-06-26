@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import { Play, Clock, Users, Star, ArrowRight } from "lucide-react";
+import { tools } from "@/db/tools";
 
 export default function AboutPage() {
   return (
@@ -105,9 +106,9 @@ export default function AboutPage() {
           className="grid md:grid-cols-4 gap-6 mb-16"
         >
           {[
-            { icon: Play, label: "Videos Edited", value: "500+" },
-            { icon: Users, label: "Happy Clients", value: "100+" },
-            { icon: Clock, label: "Hours of Content", value: "1000+" },
+            { icon: Play, label: "Videos Edited", value: "7+" },
+            { icon: Users, label: "Happy Clients", value: "3+" },
+            { icon: Clock, label: "Hours of Content", value: "100+" },
             { icon: Star, label: "Client Rating", value: "5.0" },
           ].map((stat, index) => (
             <GlassmorphismCard key={stat.label} className="p-6 text-center">
@@ -132,15 +133,15 @@ export default function AboutPage() {
               Tools I Use
             </h3>
             <div className="grid md:grid-cols-5 gap-6 text-center">
-              {[
-                { name: "DaVinci Resolve", icon: "🎬" },
-                { name: "Premiere Pro", icon: "🎞️" },
-                { name: "After Effects", icon: "✨" },
-                { name: "Photoshop", icon: "🎨" },
-                { name: "Audition", icon: "🎵" },
-              ].map((tool) => (
-                <div key={tool.name} className="space-y-2">
-                  <div className="text-4xl">{tool.icon}</div>
+              {tools.map((tool) => (
+                <div key={tool.id} className="space-y-2">
+                  <div className="flex justify-center">
+                    <img
+                      src={tool.image_link}
+                      alt={tool.name}
+                      className="w-16 h-16 object-contain"
+                    />
+                  </div>
                   <p className="text-white font-medium">{tool.name}</p>
                 </div>
               ))}
@@ -164,7 +165,7 @@ export default function AboutPage() {
               video, promotional content, or a full documentary, I'm here to
               bring your vision to life.
             </p>
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <Button asChild size="lg" variant="outline">
               <a href="/contact">
                 Get In Touch <ArrowRight className="ml-2" size={20} />
               </a>

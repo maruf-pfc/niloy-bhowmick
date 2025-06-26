@@ -17,7 +17,7 @@ import {
   Quote,
   ExternalLink,
 } from "lucide-react";
-import { getVideoProjectById } from "@/lib/helper";
+import { getVideoProjectById, getYouTubeEmbedUrl } from "@/lib/helper";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -43,14 +43,7 @@ export default function ProjectPage() {
     );
   }
 
-  const extractVideoId = (url: string) => {
-    const match = url.match(
-      /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/
-    );
-    return match ? match[1] : null;
-  };
-
-  const videoId = extractVideoId(project.video_link);
+  const embedUrl = getYouTubeEmbedUrl(project.video_link);
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -86,9 +79,9 @@ export default function ProjectPage() {
             >
               <GlassmorphismCard className="p-6">
                 <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-900">
-                  {showVideo && videoId ? (
+                  {showVideo && embedUrl ? (
                     <iframe
-                      src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                      src={`${embedUrl}?autoplay=1`}
                       title={project.video_title}
                       className="w-full h-full"
                       allowFullScreen
@@ -162,7 +155,14 @@ export default function ProjectPage() {
                         <Calendar className="mr-2" size={14} />
                         <span>
                           Published:{" "}
-                          {new Date(project.publish_date).toLocaleDateString()}
+                          {new Date(project.publish_date).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }
+                          )}
                         </span>
                       </div>
                       <div className="flex items-center text-gray-400">
@@ -228,43 +228,45 @@ export default function ProjectPage() {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Client Feedback */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <GlassmorphismCard className="p-6">
-                <h3 className="text-lg font-semibold mb-4 text-white">
-                  Client Feedback
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <Image
-                      src={project.client_image || "/placeholder.svg"}
-                      alt={project.client_name}
-                      width={48}
-                      height={48}
-                      className="rounded-full"
-                    />
-                    <div>
-                      <p className="font-medium text-white">
-                        {project.client_name}
+            {project.client_feedback?.trim() && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <GlassmorphismCard className="p-6">
+                  <h3 className="text-lg font-semibold mb-4 text-white">
+                    Client Feedback
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <Image
+                        src={project.client_image || "/placeholder.svg"}
+                        alt={project.client_name}
+                        width={48}
+                        height={48}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <p className="font-medium text-white">
+                          {project.client_name}
+                        </p>
+                        <p className="text-sm text-gray-400">Client</p>
+                      </div>
+                    </div>
+                    <div className="relative">
+                      <Quote
+                        className="absolute -top-2 -left-2 text-blue-400 opacity-50"
+                        size={24}
+                      />
+                      <p className="text-gray-300 italic pl-6">
+                        {project.client_feedback}
                       </p>
-                      <p className="text-sm text-gray-400">Client</p>
                     </div>
                   </div>
-                  <div className="relative">
-                    <Quote
-                      className="absolute -top-2 -left-2 text-blue-400 opacity-50"
-                      size={24}
-                    />
-                    <p className="text-gray-300 italic pl-6">
-                      {project.client_feedback}
-                    </p>
-                  </div>
-                </div>
-              </GlassmorphismCard>
-            </motion.div>
+                </GlassmorphismCard>
+              </motion.div>
+            )}
 
             {/* Project Images */}
             {project.project_images && project.project_images.length > 0 && (

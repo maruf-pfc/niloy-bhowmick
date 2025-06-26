@@ -16,22 +16,22 @@ export default function Footer() {
   const socialLinks = [
     {
       name: "YouTube",
-      href: "https://youtube.com/@niloy",
+      href: "#",
       icon: Youtube,
     },
     {
       name: "Instagram",
-      href: "https://instagram.com/niloy",
+      href: "https://instagram.com/its.niloybhowmick",
       icon: Instagram,
     },
     {
       name: "LinkedIn",
-      href: "https://linkedin.com/in/niloy",
+      href: "https://www.linkedin.com/in/niloy-bhowmick",
       icon: Linkedin,
     },
     {
       name: "Twitter",
-      href: "https://twitter.com/niloy",
+      href: "#",
       icon: Twitter,
     },
     {
@@ -71,12 +71,12 @@ export default function Footer() {
               >
                 About
               </Link>
-              <Link
+              {/* <Link
                 href="/services"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 Services
-              </Link>
+              </Link> */}
               <Link
                 href="/contact"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -111,8 +111,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700/50 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm flex items-center justify-center gap-1">
-            Made with <Heart className="text-red-500" size={16} /> by Niloy
-            Bhowmick © {currentYear}
+            Made with <Heart className="text-red-500" size={16} /> by <a href="https://www.linkedin.com/in/mdmarufsarker/" target="_blank" rel="noopener noreferrer">Md. Maruf Sarker</a> © {currentYear}
           </p>
         </div>
       </div>

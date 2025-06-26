@@ -23,3 +23,20 @@ export function getFeaturedProjects(limit = 6): VideoProject[] {
     )
     .slice(0, limit);
 }
+
+// Helper function to get the proper embed link
+export const getYouTubeEmbedUrl = (url: string): string | null => {
+  if (!url) return null;
+
+  // Handle Shorts
+  if (url.includes("youtube.com/shorts/")) {
+    const match = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  }
+
+  // Handle Regular YouTube video
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+};

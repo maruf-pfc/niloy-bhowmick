@@ -44,52 +44,6 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <MouseMoveEffect />
-
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 relative">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-              Niloy Bhowmick
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Video Editor & Motion Graphics Designer
-            </p>
-            <p className="text-lg text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed">
-              Turning raw footage into visual stories — with style, precision,
-              and a touch of cinematic magic.
-              <br />
-              Specializing in DaVinci Resolve, Premiere Pro, and After Effects —
-              delivering cinematic edits, clean motion graphics, and polished
-              visual storytelling.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-4 mb-16"
-          >
-            <Button asChild size="lg" variant="outline">
-              <Link href="#projects">
-                View My Work <Play className="ml-2" size={20} />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/contact">
-                Get In Touch <ArrowRight className="ml-2" size={20} />
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -203,7 +157,11 @@ export default function HomePage() {
                             <span>
                               {new Date(
                                 project.publish_date
-                              ).toLocaleDateString()}
+                              ).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              })}
                             </span>
                           </div>
                         </div>
@@ -235,7 +193,7 @@ export default function HomePage() {
                               {project.client_name}
                             </span>
                           </div>
-                          <Button variant="outline" size="sm">
+                          <Button variant="outline" size="sm" className="cursor-pointer">
                             <Play size={14} className="mr-1" />
                             Watch
                           </Button>
