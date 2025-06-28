@@ -5,9 +5,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import { Play, Clock, Users, Star, ArrowRight } from "lucide-react";
+import { getClients } from "@/lib/helper";
 import { tools } from "@/db/tools";
 
 export default function AboutPage() {
+  const clients = getClients();
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -119,6 +121,53 @@ export default function AboutPage() {
               <div className="text-sm text-gray-400">{stat.label}</div>
             </GlassmorphismCard>
           ))}
+        </motion.div>
+
+        {/* Clients Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mb-16"
+        >
+          <GlassmorphismCard className="p-8">
+            <h3 className="text-2xl font-semibold mb-8 text-white text-center">
+              Trusted by Amazing Clients
+            </h3>
+
+            <div className="relative overflow-hidden">
+              <div className="flex justify-center">
+                <motion.div
+                  className="flex space-x-8 min-w-fit"
+                  animate={{ x: ["0px", `-${160 * clients.length}px`] }} // 128 (w-32) + 32 (gap)
+                  transition={{
+                    duration: 20,
+                    ease: "linear",
+                    repeat: Infinity,
+                  }}
+                >
+                  {[...clients, ...clients].map((client, index) => (
+                    <div
+                      key={`${client.id}-${index}`}
+                      className="flex-shrink-0 flex flex-col items-center justify-center w-32 h-24"
+                    >
+                      <div className="relative w-16 h-16 mb-2">
+                        <Image
+                          src={client.logo || "/placeholder.svg"}
+                          alt={client.name}
+                          fill
+                          className="object-contain filter brightness-75 hover:brightness-100 transition-all duration-300"
+                        />
+                      </div>
+                      <p className="text-xs text-gray-400 text-center">
+                        {client.name}
+                      </p>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </GlassmorphismCard>
         </motion.div>
 
         {/* Tools Section */}

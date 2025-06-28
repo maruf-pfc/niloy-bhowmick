@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     const { data, error } = await resend.emails.send({
       from: "From Portfolio <onboarding@resend.dev>", // ✅ Must be verified
-      to: ["ojpsmaruf21@gmail.com"],
+      to: ["contact.niloybhowmick@gmail.com"],
       subject: subject || "New message from your portfolio",
       react: EmailTemplate({ name, email, message }),
     });

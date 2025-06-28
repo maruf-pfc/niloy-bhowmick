@@ -1,5 +1,5 @@
 export interface VideoProject {
-  id: number;
+  id: string;
   video_title: string;
   video_description: string;
   tags: string[];
@@ -13,4 +13,10 @@ export interface VideoProject {
   category: string;
   duration?: string;
   software_used?: string[];
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  logo: string;
 }

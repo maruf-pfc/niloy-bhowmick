@@ -7,6 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import {
   ArrowLeft,
@@ -17,12 +24,12 @@ import {
   Quote,
   ExternalLink,
 } from "lucide-react";
-import { getVideoProjectById, getYouTubeEmbedUrl } from "@/lib/helper";
+import { getVideoProjectById } from "@/lib/helper";
 
 export default function ProjectPage() {
   const params = useParams();
   const [showVideo, setShowVideo] = useState(false);
-  const project = getVideoProjectById(Number(params.id));
+  const project = getVideoProjectById(params.id as string);
 
   if (!project) {
     return (
@@ -43,7 +50,14 @@ export default function ProjectPage() {
     );
   }
 
-  const embedUrl = getYouTubeEmbedUrl(project.video_link);
+  const extractVideoId = (url: string) => {
+    const match = url.match(
+      /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/
+    );
+    return match ? match[1] : null;
+  };
+
+  const videoId = extractVideoId(project.video_link);
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -58,7 +72,7 @@ export default function ProjectPage() {
           <Button
             asChild
             variant="outline"
-            className="border-gray-600 text-gray-300 hover:bg-gray-800"
+            className="border-gray-600 text-gray-300 hover:bg-gray-800 bg-transparent"
           >
             <Link href="/">
               <ArrowLeft className="mr-2" size={16} />
@@ -79,9 +93,9 @@ export default function ProjectPage() {
             >
               <GlassmorphismCard className="p-6">
                 <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-900">
-                  {showVideo && embedUrl ? (
+                  {showVideo && videoId ? (
                     <iframe
-                      src={`${embedUrl}?autoplay=1`}
+                      src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
                       title={project.video_title}
                       className="w-full h-full"
                       allowFullScreen
@@ -90,11 +104,7 @@ export default function ProjectPage() {
                   ) : (
                     <div className="relative w-full h-full">
                       <Image
-                        src={
-                          project.cover_image
-                            ? `https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`
-                            : "/placeholder.svg"
-                        }
+                        src={`https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`}
                         alt={project.video_title}
                         fill
                         className="object-cover"
@@ -103,7 +113,7 @@ export default function ProjectPage() {
                         <Button
                           onClick={() => setShowVideo(true)}
                           size="lg"
-                          className="bg-red-600 hover:bg-red-700 cursor-pointer"
+                          className="bg-red-600 hover:bg-red-700"
                         >
                           <Play className="mr-2" size={24} />
                           Play Video
@@ -155,14 +165,7 @@ export default function ProjectPage() {
                         <Calendar className="mr-2" size={14} />
                         <span>
                           Published:{" "}
-                          {new Date(project.publish_date).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            }
-                          )}
+                          {new Date(project.publish_date).toLocaleDateString()}
                         </span>
                       </div>
                       <div className="flex items-center text-gray-400">
@@ -224,81 +227,87 @@ export default function ProjectPage() {
               </GlassmorphismCard>
             </motion.div>
           </div>
-
-          {/* Sidebar */}
-          <div className="space-y-8">
-            {/* Client Feedback */}
-            {project.client_feedback?.trim() && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <GlassmorphismCard className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 text-white">
-                    Client Feedback
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-3">
-                      <Image
-                        src={project.client_image || "/placeholder.svg"}
-                        alt={project.client_name}
-                        width={48}
-                        height={48}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <p className="font-medium text-white">
-                          {project.client_name}
-                        </p>
-                        <p className="text-sm text-gray-400">Client</p>
-                      </div>
-                    </div>
-                    <div className="relative">
-                      <Quote
-                        className="absolute -top-2 -left-2 text-blue-400 opacity-50"
-                        size={24}
-                      />
-                      <p className="text-gray-300 italic pl-6">
-                        {project.client_feedback}
-                      </p>
-                    </div>
-                  </div>
-                </GlassmorphismCard>
-              </motion.div>
-            )}
-
-            {/* Project Images */}
-            {project.project_images && project.project_images.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <GlassmorphismCard className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 text-white">
-                    Project Gallery
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    {project.project_images.map((image, index) => (
-                      <div
-                        key={index}
-                        className="relative aspect-video rounded-lg overflow-hidden"
-                      >
-                        <Image
-                          src={image || "/placeholder.svg"}
-                          alt={`Project image ${index + 1}`}
-                          fill
-                          className="object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </GlassmorphismCard>
-              </motion.div>
-            )}
-          </div>
         </div>
+
+        {/* Project Gallery */}
+        {project.project_images && project.project_images.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-16"
+          >
+            <GlassmorphismCard className="p-8">
+              <h3 className="text-2xl font-semibold mb-6 text-white text-center">
+                Project Gallery
+              </h3>
+              <Carousel className="w-full max-w-4xl mx-auto">
+                <CarouselContent>
+                  {project.project_images.map((image, index) => (
+                    <CarouselItem
+                      key={index}
+                      className="basis-1/2"
+                    >
+                      <div className="p-1">
+                        <div className="relative aspect-video rounded-lg overflow-hidden">
+                          <Image
+                            src={image || "/placeholder.svg"}
+                            alt={`Project image ${index + 1}`}
+                            fill
+                            className="object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="cursor-pointer" />
+                <CarouselNext className="cursor-pointer" />
+              </Carousel>
+            </GlassmorphismCard>
+          </motion.div>
+        )}
+
+        {/* Client Feedback */}
+        {project.client_feedback && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-16"
+          >
+            <GlassmorphismCard className="p-8">
+              <h3 className="text-2xl font-semibold mb-6 text-white text-center">
+                Client Feedback
+              </h3>
+              <div className="max-w-3xl mx-auto">
+                <div className="flex items-center justify-center space-x-4 mb-6">
+                  <Image
+                    src={project.client_image || "/placeholder.svg"}
+                    alt={project.client_name}
+                    width={64}
+                    height={64}
+                    className="rounded-full"
+                  />
+                  <div className="text-center">
+                    <p className="font-medium text-white text-lg">
+                      {project.client_name}
+                    </p>
+                  </div>
+                </div>
+                <div className="relative">
+                  <Quote
+                    className="absolute -top-4 -left-4 text-blue-400 opacity-50"
+                    size={32}
+                  />
+                  <blockquote className="text-gray-300 italic text-lg text-center leading-relaxed pl-8">
+                    "{project.client_feedback}"
+                  </blockquote>
+                </div>
+              </div>
+            </GlassmorphismCard>
+          </motion.div>
+        )}
       </div>
     </div>
   );

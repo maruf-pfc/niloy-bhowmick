@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,31 +8,66 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import MouseMoveEffect from "@/components/mouse-move-effect";
-import {
-  Play,
-  Clock,
-  User,
-  ArrowRight,
-  Filter,
-  TypeOutline,
-} from "lucide-react";
-import { getVideoProjects, getVideoProjectsByCategory } from "@/lib/helper";
-
-const categories = [
-  "All",
-  "Talking Head",
-  "Shorts",
-  "Promo",
-  "Documentary",
-  "Animation",
-  "Explainer",
-];
+import { Play, Clock, User, ArrowRight, Filter, Loader2 } from "lucide-react";
+import { getVideoProjectsByCategory } from "@/lib/helper";
+import type { VideoProject } from "@/types/videos";
+import { categories } from "@/db/categories";
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [projects] = useState(getVideoProjects());
+  const [displayedProjects, setDisplayedProjects] = useState<VideoProject[]>(
+    []
+  );
+  const [allProjects, setAllProjects] = useState<VideoProject[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-  const filteredProjects = getVideoProjectsByCategory(selectedCategory);
+  const ITEMS_PER_PAGE = 9;
+
+  // Load projects for selected category
+  useEffect(() => {
+    const projects = getVideoProjectsByCategory(selectedCategory);
+    setAllProjects(projects);
+    setDisplayedProjects(projects.slice(0, ITEMS_PER_PAGE));
+    setCurrentPage(1);
+    setHasMore(projects.length > ITEMS_PER_PAGE);
+  }, [selectedCategory]);
+
+  // Load more projects
+  const loadMoreProjects = useCallback(() => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
+    setTimeout(() => {
+      const nextPage = currentPage + 1;
+      const startIndex = (nextPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const newProjects = allProjects.slice(startIndex, endIndex);
+
+      setDisplayedProjects((prev) => [...prev, ...newProjects]);
+      setCurrentPage(nextPage);
+      setHasMore(endIndex < allProjects.length);
+      setLoading(false);
+    }, 500);
+  }, [currentPage, allProjects, loading, hasMore]);
+
+  // Infinite scroll for non-"All" categories
+  useEffect(() => {
+    if (selectedCategory === "All") return;
+
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 1000
+      ) {
+        loadMoreProjects();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [selectedCategory, loadMoreProjects]);
 
   const extractVideoId = (url: string) => {
     const match = url.match(
@@ -70,10 +105,6 @@ export default function HomePage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
-            <div className="flex items-center gap-2 text-gray-400 mr-4">
-              <Filter size={16} />
-              <span className="text-sm">Filter by category:</span>
-            </div>
             {categories.map((category) => (
               <Button
                 key={category}
@@ -98,7 +129,7 @@ export default function HomePage() {
             layout
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {filteredProjects.map((project, index) => (
+            {displayedProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 layout
@@ -111,11 +142,7 @@ export default function HomePage() {
                     <div className="space-y-4 h-full flex flex-col">
                       <div className="relative overflow-hidden rounded-lg">
                         <Image
-                          src={
-                            project.cover_image
-                              ? `https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`
-                              : "/placeholder.svg"
-                          }
+                          src={`https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`}
                           alt={project.video_title}
                           width={400}
                           height={225}
@@ -140,7 +167,7 @@ export default function HomePage() {
                       </div>
 
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">
+                        <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                           {project.video_title}
                         </h3>
                         <p className="text-gray-300 text-sm mb-4 line-clamp-3">
@@ -206,7 +233,48 @@ export default function HomePage() {
             ))}
           </motion.div>
 
-          {filteredProjects.length === 0 && (
+          {/* Load More Button for "All" category */}
+          {selectedCategory === "All" && hasMore && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center mt-12"
+            >
+              <Button
+                onClick={loadMoreProjects}
+                disabled={loading}
+                variant="outline"
+                size="lg"
+                className="cursor-pointer"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  <>
+                    Load More Projects
+                    <ArrowRight className="ml-2" size={16} />
+                  </>
+                )}
+              </Button>
+            </motion.div>
+          )}
+
+          {/* Loading indicator for infinite scroll */}
+          {selectedCategory !== "All" && loading && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center mt-12"
+            >
+              <Loader2 className="h-8 w-8 animate-spin mx-auto text-blue-400" />
+              <p className="text-gray-400 mt-2">Loading more projects...</p>
+            </motion.div>
+          )}
+
+          {displayedProjects.length === 0 && !loading && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
