@@ -7,12 +7,22 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag marufsarker/niloybhowmick:$(date +%s)
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Set Image Tag
+        id: set_tag
+        run: echo "TAG=$(date +%s)" >> "$GITHUB_ENV"
+
+      - name: Build the Docker Image
+        run: docker build . --file Dockerfile --tag marufsarker/niloybhowmick:${{ env.TAG }}
+
+      - name: Push the Docker Image
+        run: docker push marufsarker/niloybhowmick:${{ env.TAG }}
