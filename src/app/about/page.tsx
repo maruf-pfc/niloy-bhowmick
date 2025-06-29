@@ -182,7 +182,7 @@ export default function AboutPage() {
                           src={client.logo || "/placeholder.svg"}
                           alt={client.name}
                           fill
-                          className="object-contain filter brightness-75 hover:brightness-100 transition-all duration-300"
+                          className="object-contain filter brightness-75 hover:brightness-100 transition-all duration-300 rounded-full"
                         />
                       </div>
                       <p className="text-xs text-gray-400 text-center">
