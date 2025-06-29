@@ -71,12 +71,12 @@ export default function Footer() {
               >
                 About
               </Link>
-              {/* <Link
-                href="/services"
+              <Link
+                href="/skills"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Services
-              </Link> */}
+                Skills
+              </Link>
               <Link
                 href="/contact"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -111,7 +111,15 @@ export default function Footer() {
 
         <div className="border-t border-gray-700/50 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm flex items-center justify-center gap-1">
-            Made with <Heart className="text-red-500" size={16} /> by <a href="https://www.linkedin.com/in/mdmarufsarker/" target="_blank" rel="noopener noreferrer">Md. Maruf Sarker</a> © {currentYear}
+            Made with <Heart className="text-red-500" size={16} /> by{" "}
+            <a
+              href="https://www.linkedin.com/in/mdmarufsarker/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Md. Maruf Sarker
+            </a>{" "}
+            © {currentYear}
           </p>
         </div>
       </div>

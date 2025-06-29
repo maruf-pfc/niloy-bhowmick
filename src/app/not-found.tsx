@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { StepBack } from 'lucide-react';
+import { StepBack } from "lucide-react";
 
 export default function NotFound() {
   return (

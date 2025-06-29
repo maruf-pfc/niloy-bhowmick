@@ -4,9 +4,21 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GlassmorphismCard from "@/components/glassmorphism-card";
-import { Play, Clock, Users, Star, ArrowRight } from "lucide-react";
+import {
+  Play,
+  Clock,
+  Users,
+  Star,
+  ArrowRight,
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Youtube,
+} from "lucide-react";
 import { getClients } from "@/lib/helper";
 import { tools } from "@/db/tools";
+import CTASection from "@/components/CTASection";
 
 export default function AboutPage() {
   const clients = getClients();
@@ -29,7 +41,7 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid lg:grid-cols-2 gap-12 mb-16 justify-center items-center">
           {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -52,10 +64,54 @@ export default function AboutPage() {
                 <p className="text-blue-400 mb-4">
                   Video Editor & Motion Graphics Designer
                 </p>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-400 text-sm mb-6">
                   Turning raw footage into visual stories with style, precision,
                   and cinematic magic.
                 </p>
+
+                {/* Social Icons */}
+                <div className="flex justify-center gap-4">
+                  <a
+                    href="https://linkedin.com/in/your-profile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-blue-500 transition-colors"
+                  >
+                    <Linkedin size={24} />
+                  </a>
+                  <a
+                    href="https://instagram.com/your-profile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-pink-500 transition-colors"
+                  >
+                    <Instagram size={24} />
+                  </a>
+                  <a
+                    href="https://facebook.com/your-profile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-blue-600 transition-colors"
+                  >
+                    <Facebook size={24} />
+                  </a>
+                  <a
+                    href="https://youtube.com/@your-channel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-red-600 transition-colors"
+                  >
+                    <Youtube size={24} />
+                  </a>
+                  <a
+                    href="https://github.com/your-profile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Github size={24} />
+                  </a>
+                </div>
               </div>
             </GlassmorphismCard>
           </motion.div>
@@ -99,29 +155,6 @@ export default function AboutPage() {
             </GlassmorphismCard>
           </motion.div>
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="grid md:grid-cols-4 gap-6 mb-16"
-        >
-          {[
-            { icon: Play, label: "Videos Edited", value: "7+" },
-            { icon: Users, label: "Happy Clients", value: "3+" },
-            { icon: Clock, label: "Hours of Content", value: "100+" },
-            { icon: Star, label: "Client Rating", value: "5.0" },
-          ].map((stat, index) => (
-            <GlassmorphismCard key={stat.label} className="p-6 text-center">
-              <stat.icon className="mx-auto mb-4 text-blue-400" size={32} />
-              <div className="text-2xl font-bold mb-2 text-white">
-                {stat.value}
-              </div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
-            </GlassmorphismCard>
-          ))}
-        </motion.div>
 
         {/* Clients Section */}
         <motion.div
@@ -170,57 +203,13 @@ export default function AboutPage() {
           </GlassmorphismCard>
         </motion.div>
 
-        {/* Tools Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="mb-16"
-        >
-          <GlassmorphismCard className="p-8">
-            <h3 className="text-2xl font-semibold mb-6 text-white text-center">
-              Tools I Use
-            </h3>
-            <div className="grid md:grid-cols-5 gap-6 text-center">
-              {tools.map((tool) => (
-                <div key={tool.id} className="space-y-2">
-                  <div className="flex justify-center">
-                    <img
-                      src={tool.image_link}
-                      alt={tool.name}
-                      className="w-16 h-16 object-contain"
-                    />
-                  </div>
-                  <p className="text-white font-medium">{tool.name}</p>
-                </div>
-              ))}
-            </div>
-          </GlassmorphismCard>
-        </motion.div>
-
         {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-          className="text-center"
-        >
-          <GlassmorphismCard className="p-8">
-            <h3 className="text-2xl font-semibold mb-4 text-white">
-              Ready to Work Together?
-            </h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Let's create something amazing together. Whether it's a YouTube
-              video, promotional content, or a full documentary, I'm here to
-              bring your vision to life.
-            </p>
-            <Button asChild size="lg" variant="outline">
-              <a href="/contact">
-                Get In Touch <ArrowRight className="ml-2" size={20} />
-              </a>
-            </Button>
-          </GlassmorphismCard>
-        </motion.div>
+        <CTASection
+          title="Ready to Work Together?"
+          description="Let's create something amazing together. Whether it's a YouTube video, promotional content, or a full documentary, I'm here to bring your vision to life."
+          buttonText="Get In Touch"
+          href="/contact"
+        />
       </div>
     </div>
   );

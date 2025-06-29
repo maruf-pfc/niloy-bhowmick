@@ -220,7 +220,11 @@ export default function HomePage() {
                               {project.client_name}
                             </span>
                           </div>
-                          <Button variant="outline" size="sm" className="cursor-pointer">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="cursor-pointer"
+                          >
                             <Play size={14} className="mr-1" />
                             Watch
                           </Button>
