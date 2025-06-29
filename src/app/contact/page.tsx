@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import { Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,29 +15,42 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      subject: formData.get("subject"),
-      message: formData.get("message"),
-    };
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+    const projectType = formData.get("project-type") as string;
+    const timeline = formData.get("timeline") as string;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (!message || message.length < 30) {
+      toast.error("Message should be at least 30 characters long.");
+      return;
+    }
 
     const res = await fetch("/api/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ name, email, message, projectType, timeline }),
     });
 
     const result = await res.json();
+
     if (res.ok) {
-      alert("Message sent!");
-      form.reset(); // reset the form
+      toast.success("Message sent successfully!");
+      form.reset();
     } else {
-      alert("Something went wrong: " + result.error);
+      toast.error(result.error || "Something went wrong.");
     }
   };
+
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -56,7 +70,7 @@ export default function ContactPage() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 justify-center items-center">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -159,17 +173,6 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <div className="bg-yellow-600 w-2 h-2 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <h4 className="font-medium text-white">
-                      Unlimited Revisions
-                    </h4>
-                    <p className="text-gray-400 text-sm">
-                      Until you're 100% satisfied
-                    </p>
-                  </div>
-                </div>
               </div>
             </GlassmorphismCard>
           </motion.div>
@@ -184,36 +187,38 @@ export default function ContactPage() {
               <h3 className="text-2xl font-semibold mb-6 text-white">
                 Send Message
               </h3>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium mb-2 text-gray-300"
+                      className="text-sm text-gray-300 mb-2 block"
                     >
                       Name *
                     </label>
                     <Input
                       id="name"
+                      name="name"
                       type="text"
-                      placeholder="Your name"
-                      className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-500"
                       required
+                      className="bg-gray-800/50 border-gray-600 text-white"
+                      placeholder="Your name"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium mb-2 text-gray-300"
+                      className="text-sm text-gray-300 mb-2 block"
                     >
                       Email *
                     </label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
-                      placeholder="your.email@example.com"
-                      className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-500"
                       required
+                      className="bg-gray-800/50 border-gray-600 text-white"
+                      placeholder="you@example.com"
                     />
                   </div>
                 </div>
@@ -221,13 +226,14 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="project-type"
-                    className="block text-sm font-medium mb-2 text-gray-300"
+                    className="text-sm text-gray-300 mb-2 block"
                   >
                     Project Type
                   </label>
                   <select
                     id="project-type"
-                    className="w-full bg-gray-800/50 border border-gray-600 text-white rounded-md px-3 py-2 focus:border-blue-500 focus:outline-none"
+                    name="project-type"
+                    className="w-full bg-gray-800/50 border border-gray-600 text-white rounded-md px-3 py-2"
                   >
                     <option value="">Select project type</option>
                     <option value="youtube">YouTube Video</option>
@@ -242,57 +248,40 @@ export default function ContactPage() {
 
                 <div>
                   <label
-                    htmlFor="budget"
-                    className="block text-sm font-medium mb-2 text-gray-300"
-                  >
-                    Budget Range
-                  </label>
-                  <select
-                    id="budget"
-                    className="w-full bg-gray-800/50 border border-gray-600 text-white rounded-md px-3 py-2 focus:border-blue-500 focus:outline-none"
-                  >
-                    <option value="">Select budget range</option>
-                    <option value="50-100">$50 - $100</option>
-                    <option value="100-250">$100 - $250</option>
-                    <option value="250-500">$250 - $500</option>
-                    <option value="500+">$500+</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label
                     htmlFor="timeline"
-                    className="block text-sm font-medium mb-2 text-gray-300"
+                    className="text-sm text-gray-300 mb-2 block"
                   >
                     Timeline
                   </label>
                   <Input
                     id="timeline"
+                    name="timeline"
                     type="text"
-                    placeholder="e.g., 1 week, ASAP, flexible"
-                    className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-500"
+                    className="bg-gray-800/50 border-gray-600 text-white"
+                    placeholder="e.g., 1 week, ASAP"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium mb-2 text-gray-300"
+                    className="text-sm text-gray-300 mb-2 block"
                   >
                     Project Details *
                   </label>
                   <Textarea
                     id="message"
-                    rows={6}
-                    placeholder="Tell me about your project... What type of video do you need? What's your vision? Any specific requirements?"
-                    className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-500 resize-none"
+                    name="message"
                     required
+                    rows={6}
+                    placeholder="Tell me about your project..."
+                    className="bg-gray-800/50 border-gray-600 text-white resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                 >
                   <Send className="mr-2" size={16} />
                   Send Message

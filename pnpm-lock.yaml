@@ -62,6 +62,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
+      react-toastify:
+        specifier: ^11.0.5
+        version: 11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-vertical-timeline-component:
         specifier: ^3.5.3
         version: 3.5.3(@babel/core@7.0.0-beta.56)(react@19.1.0)
@@ -2244,6 +2247,12 @@ packages:
 
   react-promise-suspense@0.3.4:
     resolution: {integrity: sha512-I42jl7L3Ze6kZaq+7zXWSunBa3b1on5yfvUW6Eo/3fFOj6dZ5Bqmcd264nJbTK/gn1HjjILAjSwnZbV4RpSaNQ==}
+
+  react-toastify@11.0.5:
+    resolution: {integrity: sha512-EpqHBGvnSTtHYhCPLxML05NLY2ZX0JURbAdNYa6BUkk+amz4wbKBQvoKQAB0ardvSarUBuY4Q4s1sluAzZwkmA==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
 
   react-vertical-timeline-component@3.5.3:
     resolution: {integrity: sha512-GS3kcppKpxbgOJDbPWsO3B6/MktVuo/YzebrOHcf5IF9VfOGeKysJuMyuKkvp6XDWAm0n1wlIYyYK1GxiGXSqQ==}
@@ -4921,6 +4930,12 @@ snapshots:
   react-promise-suspense@0.3.4:
     dependencies:
       fast-deep-equal: 2.0.1
+
+  react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      clsx: 2.1.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   react-vertical-timeline-component@3.5.3(@babel/core@7.0.0-beta.56)(react@19.1.0):
     dependencies:
