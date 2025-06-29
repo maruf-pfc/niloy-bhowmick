@@ -65,7 +65,7 @@ export default function AboutPage() {
                 {/* Social Icons */}
                 <div className="flex justify-center gap-4">
                   <a
-                    href="https://linkedin.com/in/your-profile"
+                    href="https://www.linkedin.com/in/niloy-bhowmick"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -73,7 +73,7 @@ export default function AboutPage() {
                     <Linkedin size={24} />
                   </a>
                   <a
-                    href="https://instagram.com/your-profile"
+                    href="https://www.instagram.com/its.niloybhowmick"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-pink-500 transition-colors"
@@ -81,7 +81,7 @@ export default function AboutPage() {
                     <Instagram size={24} />
                   </a>
                   <a
-                    href="https://facebook.com/your-profile"
+                    href="https://www.facebook.com/Its.niloybhowmick"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-600 transition-colors"
@@ -89,7 +89,7 @@ export default function AboutPage() {
                     <Facebook size={24} />
                   </a>
                   <a
-                    href="https://youtube.com/@your-channel"
+                    href="https://www.youtube.com/@itsniloybhowmick"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-red-600 transition-colors"
@@ -97,7 +97,7 @@ export default function AboutPage() {
                     <Youtube size={24} />
                   </a>
                   <a
-                    href="https://github.com/your-profile"
+                    href="https://github.com/Zan-getsu"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
