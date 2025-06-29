@@ -7,11 +7,10 @@ import Navbar from "@/components/navbar";
 import MouseMoveEffect from "@/components/mouse-move-effect";
 import JumpToTop from "@/components/jump-to-top";
 import Footer from "@/components/footer";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
-const nunito = Nunito({ subsets: ["latin"] });
+// const nunito = Nunito({ subsets: ["latin"] });q
 
 export const metadata: Metadata = {
   title: {
@@ -148,7 +147,7 @@ export default function RootLayout({
           <main className="pt-16">{children}</main>
           <Footer />
           <JumpToTop />
-          <ToastContainer position="top-center" autoClose={3000} />
+          <Toaster position="top-center" />
         </div>
       </body>
     </html>

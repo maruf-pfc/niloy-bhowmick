@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import { Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
-import { toast } from "react-toastify";
+import { toast } from "sonner"
 
 export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,12 +24,12 @@ export default function ContactPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address.");
+      toast("Please enter a valid email address.")
       return;
     }
 
     if (!message || message.length < 30) {
-      toast.error("Message should be at least 30 characters long.");
+      toast("Message should be at least 30 characters long.");
       return;
     }
 
@@ -44,10 +44,10 @@ export default function ContactPage() {
     const result = await res.json();
 
     if (res.ok) {
-      toast.success("Message sent successfully!");
+      toast("Message sent successfully!");
       form.reset();
     } else {
-      toast.error(result.error || "Something went wrong.");
+      toast(result.error || "Something went wrong.");
     }
   };
 

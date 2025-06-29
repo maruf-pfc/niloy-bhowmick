@@ -23,15 +23,17 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const ITEMS_PER_PAGE = 9;
+  const getItemsPerPage = (category: string) => (category === "All" ? 9 : 3);
 
   // Load projects for selected category
   useEffect(() => {
     const projects = getVideoProjectsByCategory(selectedCategory);
+    const itemsPerPage = getItemsPerPage(selectedCategory);
+
     setAllProjects(projects);
-    setDisplayedProjects(projects.slice(0, ITEMS_PER_PAGE));
+    setDisplayedProjects(projects.slice(0, itemsPerPage));
     setCurrentPage(1);
-    setHasMore(projects.length > ITEMS_PER_PAGE);
+    setHasMore(projects.length > itemsPerPage);
   }, [selectedCategory]);
 
   // Load more projects
@@ -39,10 +41,12 @@ export default function HomePage() {
     if (loading || !hasMore) return;
 
     setLoading(true);
+    const itemsPerPage = getItemsPerPage(selectedCategory);
+
     setTimeout(() => {
       const nextPage = currentPage + 1;
-      const startIndex = (nextPage - 1) * ITEMS_PER_PAGE;
-      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const startIndex = (nextPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
       const newProjects = allProjects.slice(startIndex, endIndex);
 
       setDisplayedProjects((prev) => [...prev, ...newProjects]);
@@ -50,7 +54,7 @@ export default function HomePage() {
       setHasMore(endIndex < allProjects.length);
       setLoading(false);
     }, 500);
-  }, [currentPage, allProjects, loading, hasMore]);
+  }, [currentPage, allProjects, loading, hasMore, selectedCategory]);
 
   // Infinite scroll for non-"All" categories
   useEffect(() => {
