@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import GlassmorphismCard from '@/components/glassmorphism-card';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { CTASectionProps } from '@/types/cta';
+import { motion } from "framer-motion";
+import GlassmorphismCard from "@/components/glassmorphism-card";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CTASectionProps } from "@/types/cta";
 
 const CTASection = ({
   title,

@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function IntroAnimation() {
-  const [showIntro, setShowIntro] = useState(false)
+  const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
     // Check if intro has been shown before
-    const hasSeenIntro = localStorage.getItem("hasSeenIntro")
+    const hasSeenIntro = localStorage.getItem("hasSeenIntro");
 
     if (!hasSeenIntro) {
-      setShowIntro(true)
+      setShowIntro(true);
       // Set flag in localStorage so intro doesn't show again
-      localStorage.setItem("hasSeenIntro", "true")
+      localStorage.setItem("hasSeenIntro", "true");
 
       // Auto-hide intro after 5 seconds (simulating video end)
       const timer = setTimeout(() => {
-        setShowIntro(false)
-      }, 5000)
+        setShowIntro(false);
+      }, 5000);
 
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     }
-  }, [])
+  }, []);
 
   return (
     <AnimatePresence>
@@ -42,7 +42,12 @@ export default function IntroAnimation() {
             >
               <div className="inline-block rounded-full bg-gradient-to-r from-purple-500 to-pink-600 p-1">
                 <div className="flex h-24 w-24 items-center justify-center rounded-full bg-black">
-                  <svg className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="h-12 w-12 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -75,5 +80,5 @@ export default function IntroAnimation() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

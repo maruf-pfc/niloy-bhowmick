@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import {
   VerticalTimeline,

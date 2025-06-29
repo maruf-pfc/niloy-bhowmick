@@ -2,14 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import {
-  Play,
-  Clock,
-  Users,
-  Star,
-  ArrowRight,
   Facebook,
   Github,
   Instagram,
@@ -17,7 +11,6 @@ import {
   Youtube,
 } from "lucide-react";
 import { getClients } from "@/lib/helper";
-import { tools } from "@/db/tools";
 import CTASection from "@/components/CTASection";
 
 export default function AboutPage() {

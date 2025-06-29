@@ -5,34 +5,41 @@ import { Client, VideoProject } from "@/types/videos";
 // Helper functions
 // Helper functions
 export function getAllVideoProjects(): VideoProject[] {
-  const allProjects: VideoProject[] = []
+  const allProjects: VideoProject[] = [];
   Object.values(videoProjectsData).forEach((categoryProjects) => {
-    allProjects.push(...categoryProjects)
-  })
+    allProjects.push(...categoryProjects);
+  });
   // Sort by publish_date (latest first)
-  return allProjects.sort((a, b) => new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime())
+  return allProjects.sort(
+    (a, b) =>
+      new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime()
+  );
 }
 
 export function getVideoProjectsByCategory(category?: string): VideoProject[] {
   if (!category || category === "All") {
-    return getAllVideoProjects()
+    return getAllVideoProjects();
   }
-  const categoryProjects = videoProjectsData[category as keyof typeof videoProjectsData] || []
+  const categoryProjects =
+    videoProjectsData[category as keyof typeof videoProjectsData] || [];
   // Sort by publish_date (latest first)
-  return categoryProjects.sort((a, b) => new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime())
+  return categoryProjects.sort(
+    (a, b) =>
+      new Date(b.publish_date).getTime() - new Date(a.publish_date).getTime()
+  );
 }
 
 export function getVideoProjectById(id: string): VideoProject | undefined {
-  const allProjects = getAllVideoProjects()
-  return allProjects.find((project) => project.id === id)
+  const allProjects = getAllVideoProjects();
+  return allProjects.find((project) => project.id === id);
 }
 
 export function getFeaturedProjects(limit = 6): VideoProject[] {
-  return getAllVideoProjects().slice(0, limit)
+  return getAllVideoProjects().slice(0, limit);
 }
 
 export function getClients(): Client[] {
-  return clientsData
+  return clientsData;
 }
 
 // Helper function to get the proper embed link
