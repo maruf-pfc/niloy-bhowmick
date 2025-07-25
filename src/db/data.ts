@@ -123,7 +123,7 @@ export const videoProjectsData = {
       software_used: ["DaVinci Resolve", "Audition"],
     },
   ],
-  Motion Graphics: [
+  "Motion Graphics": [
     {
       id: "H29MJ6vLbcg",
       video_title: "Stack Learner Brand Intro",
@@ -144,7 +144,7 @@ export const videoProjectsData = {
         "/project-images/MCD9uyZT8Y0.png",
         "/project-images/MCD9uyZT8Y0.png",
       ],
-      category: "Animation",
+      category: "Motion Graphics",
       duration: "0:22",
       software_used: ["After Effects"],
     },
