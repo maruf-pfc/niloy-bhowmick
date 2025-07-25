@@ -123,7 +123,7 @@ export const videoProjectsData = {
       software_used: ["DaVinci Resolve", "Audition"],
     },
   ],
-  Animation: [
+  Motion Graphics: [
     {
       id: "H29MJ6vLbcg",
       video_title: "Stack Learner Brand Intro",
