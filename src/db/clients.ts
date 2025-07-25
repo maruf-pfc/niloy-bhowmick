@@ -17,18 +17,13 @@ export const clientsData: Client[] = [
     logo: "/companies/eco-revolution.jpg",
   },
   {
-    id: "tech-solutions",
-    name: "Tech Solutions Inc",
-    logo: "/companies/batman.png",
+    id: "growthleo",
+    name: "GrowthLeo LLC",
+    logo: "/companies/growthleo.png",
   },
   {
-    id: "creative-agency",
-    name: "Creative Agency",
-    logo: "/companies/batman.png",
-  },
-  {
-    id: "digital-marketing",
-    name: "Digital Marketing Pro",
-    logo: "/companies/batman.png",
+    id: "impel-it",
+    name: "Impel IT",
+    logo: "/companies/impel-it.png",
   },
 ];
