@@ -128,13 +128,7 @@ export default function ProjectPage() {
         >
           <GlassmorphismCard className="p-6 md:p-8">
             <div className="mb-6">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
-                <Badge
-                  variant="secondary"
-                  className="bg-blue-600 text-white w-fit"
-                >
-                  {project.category}
-                </Badge>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-end mb-4 gap-4">
                 {project.duration && (
                   <div className="flex items-center text-gray-400 text-sm">
                     <Clock className="mr-1" size={14} />
@@ -198,15 +192,17 @@ export default function ProjectPage() {
             </div>
 
             <div className="mb-8">
-              <h3 className="text-lg font-semibold mb-3 text-white">Tags</h3>
+              <h3 className="text-lg font-semibold mb-3 text-white">
+                Categories
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {project.category.map((category) => (
                   <Badge
-                    key={tag}
+                    key={category}
                     variant="outline"
                     className="border-gray-600 text-gray-300"
                   >
-                    {tag}
+                    {category}
                   </Badge>
                 ))}
               </div>
