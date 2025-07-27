@@ -9,9 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import MouseMoveEffect from "@/components/mouse-move-effect";
 import { Play, Clock, User, ArrowRight, Filter, Loader2 } from "lucide-react";
-import { getVideoProjectsByCategory } from "@/lib/helper";
+import { getVideoProjectsByCategory, getVideoCategories } from "@/lib/helper";
 import type { VideoProject } from "@/types/videos";
-import { categories } from "@/db/categories";
+
+const categories = ["All", ...getVideoCategories()];
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -23,17 +24,15 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const getItemsPerPage = (category: string) => (category === "All" ? 9 : 3);
+  const ITEMS_PER_PAGE = 9;
 
   // Load projects for selected category
   useEffect(() => {
     const projects = getVideoProjectsByCategory(selectedCategory);
-    const itemsPerPage = getItemsPerPage(selectedCategory);
-
     setAllProjects(projects);
-    setDisplayedProjects(projects.slice(0, itemsPerPage));
+    setDisplayedProjects(projects.slice(0, ITEMS_PER_PAGE));
     setCurrentPage(1);
-    setHasMore(projects.length > itemsPerPage);
+    setHasMore(projects.length > ITEMS_PER_PAGE);
   }, [selectedCategory]);
 
   // Load more projects
@@ -41,12 +40,10 @@ export default function HomePage() {
     if (loading || !hasMore) return;
 
     setLoading(true);
-    const itemsPerPage = getItemsPerPage(selectedCategory);
-
     setTimeout(() => {
       const nextPage = currentPage + 1;
-      const startIndex = (nextPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
+      const startIndex = (nextPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
       const newProjects = allProjects.slice(startIndex, endIndex);
 
       setDisplayedProjects((prev) => [...prev, ...newProjects]);
@@ -54,7 +51,7 @@ export default function HomePage() {
       setHasMore(endIndex < allProjects.length);
       setLoading(false);
     }, 500);
-  }, [currentPage, allProjects, loading, hasMore, selectedCategory]);
+  }, [currentPage, allProjects, loading, hasMore]);
 
   // Infinite scroll for non-"All" categories
   useEffect(() => {
@@ -73,16 +70,10 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [selectedCategory, loadMoreProjects]);
 
-  const extractVideoId = (url: string) => {
-    const match = url.match(
-      /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/
-    );
-    return match ? match[1] : null;
-  };
-
   return (
     <div className="min-h-screen">
       <MouseMoveEffect />
+
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -113,14 +104,14 @@ export default function HomePage() {
               <Button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                variant={selectedCategory === category ? "default" : "outline"}
                 size="sm"
                 className={`
+                  border cursor-pointer
                   ${
                     selectedCategory === category
-                      ? "bg-[#020817] hover:text-black"
-                      : "bg-white/10 border-white/20 text-white hover:bg-white/20"
-                  } cursor-pointer
+                      ? "bg-[#020817] text-white border-white"
+                      : "bg-white/10 text-white border-white/20 hover:bg-white/20"
+                  }
                 `}
               >
                 {category}
@@ -155,14 +146,6 @@ export default function HomePage() {
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                           <Play className="text-white" size={48} />
                         </div>
-                        <div className="absolute top-2 right-2">
-                          <Badge
-                            variant="secondary"
-                            className="bg-black/70 text-white"
-                          >
-                            {project.category}
-                          </Badge>
-                        </div>
                         {project.duration && (
                           <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                             {project.duration}
@@ -188,23 +171,19 @@ export default function HomePage() {
                             <span>
                               {new Date(
                                 project.publish_date
-                              ).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              })}
+                              ).toLocaleDateString()}
                             </span>
                           </div>
                         </div>
 
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {project.tags.slice(0, 3).map((tag) => (
+                          {project.category.slice(0, 3).map((category) => (
                             <Badge
-                              key={tag}
+                              key={category}
                               variant="outline"
                               className="text-xs border-gray-600 text-gray-300"
                             >
-                              {tag}
+                              {category}
                             </Badge>
                           ))}
                         </div>
@@ -225,12 +204,11 @@ export default function HomePage() {
                             </span>
                           </div>
                           <Button
-                            variant="outline"
                             size="sm"
-                            className="cursor-pointer"
+                            className="bg-white/10 text-white border-white/20 hover:bg-white/20 cursor-pointer"
                           >
                             <Play size={14} className="mr-1" />
-                            Watch
+                            Watch Now
                           </Button>
                         </div>
                       </div>
@@ -251,9 +229,8 @@ export default function HomePage() {
               <Button
                 onClick={loadMoreProjects}
                 disabled={loading}
-                variant="outline"
                 size="lg"
-                className="cursor-pointer"
+                className="border cursor-pointer"
               >
                 {loading ? (
                   <>

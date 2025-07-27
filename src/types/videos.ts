@@ -10,7 +10,7 @@ export interface VideoProject {
   client_feedback: string;
   video_link: string;
   project_images: string[];
-  category: string;
+  category: string[];
   duration?: string;
   software_used?: string[];
 }
