@@ -9,10 +9,13 @@ import { Badge } from "@/components/ui/badge";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import MouseMoveEffect from "@/components/mouse-move-effect";
 import { Play, Clock, User, ArrowRight, Filter, Loader2 } from "lucide-react";
-import { getVideoProjectsByCategory, getVideoCategories } from "@/lib/helper";
+import {
+  getVideoProjectsByCategory,
+  getVideoCategoriesWithCountIncludingAll,
+} from "@/lib/helper";
 import type { VideoProject } from "@/types/videos";
 
-const categories = ["All", ...getVideoCategories()];
+const categories = getVideoCategoriesWithCountIncludingAll();
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -94,7 +97,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Category Filter */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -115,6 +118,34 @@ export default function HomePage() {
                 `}
               >
                 {category}
+              </Button>
+            ))}
+          </motion.div> */}
+          {/* Category Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-4 mb-12"
+          >
+            {categories.map(({ category, count }) => (
+              <Button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                size="sm"
+                className={`
+                  relative border cursor-pointer
+                  ${
+                    selectedCategory === category
+                      ? "bg-[#020817] text-white border-white"
+                      : "bg-white/10 text-white border-white/20 hover:bg-white/20"
+                  }
+                `}
+              >
+                {category}
+                <span className="absolute top-[-6px] right-[-6px] bg-slate-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">
+                  {count}
+                </span>
               </Button>
             ))}
           </motion.div>

@@ -41,7 +41,37 @@ export const getVideoCategories = (): string[] => {
     project.category.forEach((cat) => categoriesSet.add(cat));
   });
 
-  return Array.from(categoriesSet).sort();
+  return Array.from(categoriesSet);
+};
+
+// Returns categories with project count, sorted descending
+export const getVideoCategoriesWithCount = (): {
+  category: string;
+  count: number;
+}[] => {
+  const categoryCountMap = new Map<string, number>();
+
+  allVideoProjects.forEach((project) => {
+    project.category.forEach((cat) => {
+      categoryCountMap.set(cat, (categoryCountMap.get(cat) || 0) + 1);
+    });
+  });
+
+  const sortedCategories = Array.from(categoryCountMap.entries())
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => b.count - a.count);
+
+  return sortedCategories;
+};
+
+export const getVideoCategoriesWithCountIncludingAll = (): {
+  category: string;
+  count: number;
+}[] => {
+  const categoryCounts = getVideoCategoriesWithCount();
+  const total = allVideoProjects.length;
+
+  return [{ category: "All", count: total }, ...categoryCounts];
 };
 
 export function getFeaturedProjects(limit = 6): VideoProject[] {
