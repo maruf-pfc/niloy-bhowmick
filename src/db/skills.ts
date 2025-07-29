@@ -126,7 +126,7 @@ export const specializations = [
 
 export const achievements = [
   {
-    title: "7+ Projects Completed",
+    title: "50+ Projects Completed",
     description:
       "Successfully delivered over 100 video projects across various industries",
     icon: Award,
