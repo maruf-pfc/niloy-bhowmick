@@ -3,15 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import GlassmorphismCard from "@/components/glassmorphism-card";
-import {
-  Facebook,
-  Github,
-  Instagram,
-  Linkedin,
-  Youtube,
-} from "lucide-react";
+import { Facebook, Github, Instagram, Linkedin, Youtube } from "lucide-react";
 import { getClients } from "@/lib/helper";
 import CTASection from "@/components/CTASection";
+import Marquee from "@/components/ui/marquee";
+import { clientsData } from "@/db/clients";
 
 export default function AboutPage() {
   const clients = getClients();
@@ -161,38 +157,26 @@ export default function AboutPage() {
               Trusted by Amazing Clients
             </h3>
 
-            <div className="relative overflow-hidden">
-              <div className="flex justify-center">
-                <motion.div
-                  className="flex space-x-8 min-w-fit"
-                  animate={{ x: ["0px", `-${160 * clients.length}px`] }} // 128 (w-32) + 32 (gap)
-                  transition={{
-                    duration: 20,
-                    ease: "linear",
-                    repeat: Infinity,
-                  }}
+            <Marquee speed={40} pauseOnHover className="pt-4">
+              {clientsData.map((client) => (
+                <div
+                  key={client.id}
+                  className="flex-shrink-0 flex flex-col items-center justify-center w-32 h-24"
                 >
-                  {[...clients, ...clients].map((client, index) => (
-                    <div
-                      key={`${client.id}-${index}`}
-                      className="flex-shrink-0 flex flex-col items-center justify-center w-32 h-24"
-                    >
-                      <div className="relative w-16 h-16 mb-2">
-                        <Image
-                          src={client.logo || "/placeholder.svg"}
-                          alt={client.name}
-                          fill
-                          className="object-contain filter brightness-75 hover:brightness-100 transition-all duration-300 rounded-full"
-                        />
-                      </div>
-                      <p className="text-xs text-gray-400 text-center">
-                        {client.name}
-                      </p>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-            </div>
+                  <div className="relative w-16 h-16 mb-2">
+                    <Image
+                      src={client.logo}
+                      alt={client.name}
+                      fill
+                      className="object-contain rounded-full transition-all duration-300"
+                    />
+                  </div>
+                  <p className="text-xs text-gray-400 text-center">
+                    {client.name}
+                  </p>
+                </div>
+              ))}
+            </Marquee>
           </GlassmorphismCard>
         </motion.div>
 
