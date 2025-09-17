@@ -29,6 +29,6 @@ export const clientsData: Client[] = [
   {
     id: "ecofarming",
     name: "Eco Farming",
-    logo: "/companies/ecofarming.png",
+    logo: "/companies/Ecofarming.png",
   },
 ];
