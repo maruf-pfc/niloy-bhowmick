@@ -26,4 +26,9 @@ export const clientsData: Client[] = [
     name: "Impel IT",
     logo: "/companies/impel-it.png",
   },
+  {
+    id: "ecofarming",
+    name: "Eco Farming",
+    logo: "/companies/ecofarming.png",
+  },
 ];
