@@ -41,7 +41,7 @@ export default function Navbar() {
           px-6 sm:px-8 py-3
           transition-all duration-500 ease-[cubic-bezier(0.25,0.8,0.25,1)] border
           ${scrolled || isOpen
-            ? "w-[95%] max-w-5xl rounded-3xl backdrop-blur-3xl bg-white/5 border border-white/10 shadow-2xl"
+            ? "w-[95%] max-w-5xl rounded-3xl backdrop-blur-xl md:backdrop-blur-3xl bg-white/5 border border-white/10 shadow-2xl"
             : "w-full max-w-7xl bg-transparent border-transparent"
           }
         `}>
