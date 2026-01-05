@@ -99,6 +99,20 @@ export const getYouTubeEmbedUrl = (url: string): string | null => {
   return match ? `https://www.youtube.com/embed/${match[1]}` : null;
 };
 
+export const getYouTubeVideoId = (url: string): string | null => {
+  if (!url) return null;
+
+  if (url.includes("youtube.com/shorts/")) {
+    const match = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);
+    return match ? match[1] : null;
+  }
+
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+  return match ? match[1] : null;
+};
+
 // Legacy support - keep the old structure for backward compatibility if needed
 export const videoProjectsData = {
   "Talking Head": allVideoProjects.filter((p) =>
