@@ -72,15 +72,18 @@
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
+  --background: 240 10% 2%;
+  /* Deep Black #050505 */
+  --foreground: 0 0% 100%;
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
+  --primary: 217 100% 60%;
+  /* Neon Blue */
   --primary-foreground: 222.2 84% 4.9%;
-  --secondary: 217.2 32.6% 17.5%;
+  --secondary: 260 100% 60%;
+  /* Neon Purple */
   --secondary-foreground: 210 40% 98%;
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
@@ -91,30 +94,22 @@
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 224.3 76.3% 94.1%;
-  --chart-1: 220 70% 50%;
-  --chart-2: 160 60% 45%;
-  --chart-3: 30 80% 55%;
-  --chart-4: 280 65% 60%;
-  --chart-5: 340 75% 55%;
 }
-
-/* @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-    background: #020817;
-    color: #f8fafc;
+    background: #050505;
+    /* Midnight Black */
+    color: #ffffff;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.02em;
+    /* Tight tracking for premium feel */
   }
 }
 
@@ -123,133 +118,136 @@
   scroll-behavior: smooth;
 }
 
-/* Dark Grid Background Pattern */
+/* Subtle Grid Background - Reduced Visibility for Depth */
 .grid-background {
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
 }
 
 .grid-background-large {
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
-/* Custom dark scrollbar */
+/* Custom premium scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.8);
-  border-radius: 4px;
+  background: #050505;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+  transition: background 0.2s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
+  background: rgba(255, 255, 255, 0.3);
 }
 
-/* Dark Glassmorphism effects */
-.glass {
-  background: rgba(15, 23, 42, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+/* 
+  ---------------------------------
+  MIDNIGHT LIQUID GLASS UTILITIES
+  ---------------------------------
+*/
+
+/* Base Glass Components */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  /* Milky white for true frosted look */
+  backdrop-filter: blur(50px) saturate(180%);
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  /* Edge reflection */
 }
 
-/* Terminal cursor animation */
-@keyframes blink {
-  0%,
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Text Enhancements */
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
   50% {
-    opacity: 1;
+    transform: translateY(-10px);
   }
-  51%,
+
   100% {
-    opacity: 0;
+    transform: translateY(0px);
   }
 }
 
-.terminal-cursor {
-  animation: blink 1s infinite;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-/* GitHub contribution graph styles */
-.github-calendar {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-}
-
-.github-calendar .ContributionCalendar-day {
-  border-radius: 2px;
-}
-
-/* Ensure all text is properly visible in dark theme */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #f8fafc;
-}
-
-p {
-  color: #e2e8f0;
-}
-
+/* Override overrides */
 .text-gray-300 {
-  color: #cbd5e1 !important;
+  color: #d1d5db !important;
 }
 
 .text-gray-400 {
-  color: #94a3b8 !important;
+  color: #9ca3af !important;
 }
 
-/* Dark theme for form inputs */
+/* Dark theme form enhancements */
 input,
 textarea {
-  background-color: rgba(15, 23, 42, 0.5) !important;
-  border-color: rgba(148, 163, 184, 0.3) !important;
-  color: #f8fafc !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: #94a3b8 !important;
+input:focus,
+textarea:focus {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
-/* Dark theme for buttons */
-button {
-  color: #f8fafc;
-}
-
-/* Loading spinner dark theme */
+/* Spinner override */
 .animate-spin {
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
   border-top-color: #3b82f6;
-}
-
-/* Override any white backgrounds */
-.bg-white {
-  background-color: rgba(30, 41, 59, 0.8) !important;
-}
-
-.text-black {
-  color: #f8fafc !important;
-}
-
-/* Ensure proper contrast for all elements */
-.text-gray-900 {
-  color: #f8fafc !important;
-}
-
-.bg-gray-50 {
-  background-color: rgba(51, 65, 85, 0.3) !important;
 }

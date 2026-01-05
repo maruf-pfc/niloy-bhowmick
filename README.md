@@ -12,6 +12,8 @@ A modern, responsive video editor portfolio website showcasing professional vide
 
 - **YouTube Video Integration**: Embedded video players with click-to-play functionality
 - **Glassmorphism Design**: Modern glass-like UI elements with backdrop blur effects
+- **Midnight Liquid Glass**: Enhanced UI offering a deep black aesthetic with heavy milky-glass blur, dynamic edge reflections, and organic fluid animations.
+- **Unified Liquid Navigation**: A shapeshifting navbar that fluidly expands to contain mobile menus, eliminating layout jumps.
 - **Grid Background Pattern**: Professional dark gradient background with subtle grid patterns
 - **Mouse Movement Effects**: Dynamic background gradients that follow cursor movement
 - **Responsive Design**: Fully responsive across all device sizes
