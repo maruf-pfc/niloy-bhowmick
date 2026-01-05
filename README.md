@@ -28,36 +28,134 @@ This project implements a unique **"Midnight Liquid Glass"** aesthetic, focusing
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 22+
-- pnpm
 
-### Quick Start
+- Node.js 22+
+- pnpm package manager
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/maruf-pfc/niloy-bhowmick.git
+    cd niloy-bhowmick
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    pnpm install
+    ```
+
+3.  **Set up environment variables**
+    ```bash
+    cp .env.example .env
+    ```
+    Add your environment variables:
+    ```env
+    RESEND_API_KEY=your_resend_api_key_here
+    NEXT_PUBLIC_SITE_URL=https://www.itsniloy.me
+    ```
+
+4.  **Run the development server**
+    ```bash
+    pnpm dev
+    ```
+
+5.  **Open your browser**
+    Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Building for Production
 
 ```bash
-# 1. Clone
-git clone https://github.com/maruf-pfc/niloy-bhowmick.git
-cd niloy-bhowmick
-
-# 2. Install
-pnpm install
-
-# 3. Configure
-cp .env.example .env
-# Set RESEND_API_KEY and NEXT_PUBLIC_SITE_URL
-
-# 4. Run
-pnpm dev
+pnpm build
+pnpm start
 ```
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1.  Push code to GitHub.
+2.  Connect repository to Vercel.
+3.  Add environment variables in Vercel dashboard:
+    ```env
+    RESEND_API_KEY=your_production_resend_key
+    NEXT_PUBLIC_SITE_URL=https://www.itsniloy.me
+    ```
+4.  Deploy automatically.
+
+### Other Platforms
+-   **Netlify**: Static site deployment with form handling.
+-   **AWS Amplify**: Full-stack deployment with API integration.
+-   **GitHub Pages**: Static deployment (limited functionality).
 
 ## 📂 Project Structure
 
 ```plaintext
-📦src
- ┣ 📂app           # Next.js App Router pages
- ┣ 📂components    # Shadcn UI & Custom Glass Components
- ┣ 📂db            # Static Data (Projects, Clients)
- ┣ 📂hooks         # Custom Hooks (use-mobile)
- ┗ 📂lib           # Utilities & Helpers
+📦niloy-bhowmick
+ ┣ 📂public
+ ┃ ┣ 📂companies
+ ┃ ┣ 📂project-images
+ ┃ ┣ 📂tools
+ ┃ ┣ 📜demo.png
+ ┃ ┣ 📜logo-transparent.png
+ ┃ ┣ 📜logo-white.png
+ ┃ ┣ 📜niloybhowmick.png
+ ┃ ┗ 📜not-found.jpg
+ ┣ 📂src
+ ┃ ┣ 📂app
+ ┃ ┃ ┣ 📂_services
+ ┃ ┃ ┣ 📂about
+ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┗ 📂send-email
+ ┃ ┃ ┣ 📂contact
+ ┃ ┃ ┣ 📂project
+ ┃ ┃ ┣ 📂skills
+ ┃ ┃ ┣ 📜favicon.ico
+ ┃ ┃ ┣ 📜globals.css
+ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┣ 📜loading.tsx
+ ┃ ┃ ┣ 📜not-found.tsx
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂animate-ui
+ ┃ ┃ ┣ 📂ui
+ ┃ ┃ ┣ 📜CTASection.tsx
+ ┃ ┃ ┣ 📜email-template.tsx
+ ┃ ┃ ┣ 📜footer.tsx
+ ┃ ┃ ┣ 📜glassmorphism-card.tsx
+ ┃ ┃ ┣ 📜intro-animation.tsx
+ ┃ ┃ ┣ 📜jump-to-top.tsx
+ ┃ ┃ ┣ 📜mouse-move-effect.tsx
+ ┃ ┃ ┣ 📜navbar.tsx
+ ┃ ┃ ┗ 📜theme-provider.tsx
+ ┃ ┣ 📂db
+ ┃ ┃ ┣ 📜categories.ts
+ ┃ ┃ ┣ 📜clients.ts
+ ┃ ┃ ┣ 📜data.ts
+ ┃ ┃ ┗ 📜skills.ts
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┗ 📜use-mobile.tsx
+ ┃ ┣ 📂lib
+ ┃ ┃ ┣ 📜helper.ts
+ ┃ ┃ ┗ 📜utils.ts
+ ┃ ┣ 📂styles
+ ┃ ┗ 📂types
+ ┃ ┃ ┣ 📜cta.ts
+ ┃ ┃ ┗ 📜videos.ts
+ ┣ 📜.dockerignore
+ ┣ 📜.env
+ ┣ 📜.gitignore
+ ┣ 📜Dockerfile
+ ┣ 📜LICENSE
+ ┣ 📜README.md
+ ┣ 📜components.json
+ ┣ 📜eslint.config.mjs
+ ┣ 📜next-env.d.ts
+ ┣ 📜next.config.ts
+ ┣ 📜package.json
+ ┣ 📜pnpm-lock.yaml
+ ┣ 📜postcss.config.mjs
+ ┗ 📜tsconfig.json
 ```
 
 ### 📝 Adding New Video Projects
