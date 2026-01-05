@@ -146,7 +146,10 @@ export default function HomePage() {
                   <GlassmorphismCard className="h-full group hover:shadow-2xl hover:shadow-blue-900/10">
                     <div className="flex flex-col h-full p-5">
                       {/* Thumbnail */}
-                      <div className="relative overflow-hidden rounded-2xl aspect-video mb-5 shadow-lg">
+                      <div
+                        className="relative overflow-hidden rounded-2xl aspect-video mb-5 shadow-lg isolation-isolate"
+                        style={{ maskImage: "linear-gradient(white, white)", WebkitMaskImage: "linear-gradient(white, white)" }}
+                      >
                         <Image
                           src={`https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`}
                           alt={project.video_title}
@@ -154,7 +157,7 @@ export default function HomePage() {
                           height={338}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] rounded-2xl overflow-hidden z-10">
                           <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white transform scale-75 group-hover:scale-100 transition-transform duration-300">
                             <Play className="ml-1 fill-white" size={28} />
                           </div>

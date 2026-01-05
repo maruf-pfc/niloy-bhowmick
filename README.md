@@ -434,4 +434,8 @@ This project is open source and available under the [GPL-2.0 License](LICENSE).
 
 ---
 
-Built with ❤️ using Next.js 15, TypeScript, Tailwind CSS, and modern web technologies.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=maruf-pfc/niloy-bhowmick&type=Date)](https://star-history.com/#maruf-pfc/niloy-bhowmick&Date)
+
