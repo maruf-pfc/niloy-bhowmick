@@ -24,7 +24,8 @@ import {
   Quote,
   ExternalLink,
 } from "lucide-react";
-import { getVideoProjectById, getYouTubeEmbedUrl } from "@/lib/helper";
+import YouTube from "react-youtube";
+import { getVideoProjectById, getYouTubeEmbedUrl, getYouTubeVideoId } from "@/lib/helper";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -83,13 +84,40 @@ export default function ProjectPage() {
         >
           <GlassmorphismCard className="p-4 md:p-6">
             <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-900">
-              {showVideo && embedUrl ? (
-                <iframe
-                  src={`${embedUrl}?autoplay=1`}
-                  title={project.video_title}
+              {showVideo && !!getYouTubeVideoId(project.video_link) ? (
+                <YouTube
+                  videoId={getYouTubeVideoId(project.video_link) as string}
+                  opts={{
+                    height: '100%',
+                    width: '100%',
+                    playerVars: {
+                      autoplay: 1,
+                      modestbranding: 1,
+                      rel: 0,
+                      vq: 'hd1080', // Hint usually works better here for initial load
+                    },
+                  }}
+                  onReady={(event: any) => {
+                    event.target.playVideo();
+                    setTimeout(() => {
+                      event.target.setPlaybackQuality('hd1080');
+                    }, 1000);
+                  }}
+                  onStateChange={(event: any) => {
+                    // Start or Buffer
+                    if (event.data === 1 || event.data === 3) {
+                      const target = event.target;
+                      // Slight delay to allow player negotiation
+                      setTimeout(() => {
+                        const quality = target.getPlaybackQuality();
+                        if (quality !== 'hd1080') {
+                          target.setPlaybackQuality('hd1080');
+                        }
+                      }, 500);
+                    }
+                  }}
                   className="w-full h-full"
-                  allowFullScreen
-                  allow="autoplay; encrypted-media"
+                  iframeClassName="w-full h-full"
                 />
               ) : (
                 <div className="relative w-full h-full">
