@@ -46,7 +46,7 @@ export default function SkillsPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-0 md:mt-20 mb-6 text-white">
             My Skills & Expertise
           </h1>
           <p className="text-gray-300 text-base md:text-lg max-w-3xl mx-auto">
