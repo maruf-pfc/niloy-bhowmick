@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import MouseMoveEffect from "@/components/mouse-move-effect";
+import Hero from "@/components/hero";
 import { Play, ArrowRight, Loader2 } from "lucide-react";
 import {
   getVideoProjectsByCategory,
@@ -75,8 +76,10 @@ export default function HomePage() {
     <div className="min-h-screen relative overflow-hidden">
       <MouseMoveEffect />
 
+      <Hero />
+
       {/* Projects Section */}
-      <section id="projects" className="pt-32 pb-20 px-4 sm:px-6">
+      <section id="projects" className="py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -140,7 +143,7 @@ export default function HomePage() {
                 layout
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
               >
                 <Link href={`/project/${project.id}`}>
                   <GlassmorphismCard className="h-full group hover:shadow-2xl hover:shadow-blue-900/10">
@@ -299,7 +302,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
                 className="h-full"
               >
                 <GlassmorphismCard className="p-8 h-full flex flex-col items-center text-center group hover:bg-white/[0.04]">

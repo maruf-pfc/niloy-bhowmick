@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar";
 import MouseMoveEffect from "@/components/mouse-move-effect";
 import JumpToTop from "@/components/jump-to-top";
 import Footer from "@/components/footer";
+import SmoothScroll from "@/components/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -142,12 +143,14 @@ export default function RootLayout({
         }}
       >
         <div className="grid-background-large min-h-screen">
-          <MouseMoveEffect />
-          <Navbar />
-          <main className="pt-16">{children}</main>
-          <Footer />
-          <JumpToTop />
-          <Toaster position="top-center" />
+          <SmoothScroll>
+            <MouseMoveEffect />
+            <Navbar />
+            <main className="">{children}</main>
+            <Footer />
+            <JumpToTop />
+            <Toaster position="top-center" />
+          </SmoothScroll>
         </div>
       </body>
     </html>
