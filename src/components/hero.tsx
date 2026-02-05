@@ -14,6 +14,7 @@ export default function Hero() {
         if (lenis) {
             lenis.scrollTo("#projects", {
                 duration: 2,
+                offset: -100, // Account for fixed navbar
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease-out for premium feel
             });
         }
