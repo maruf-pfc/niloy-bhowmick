@@ -9,7 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import MouseMoveEffect from "@/components/mouse-move-effect";
 import Hero from "@/components/hero";
-import { Play, ArrowRight, Loader2 } from "lucide-react";
+import ProjectCard from "@/components/project-card";
+import { ArrowRight, Loader2 } from "lucide-react";
 import {
   getVideoProjectsByCategory,
   getVideoCategoriesWithCountIncludingAll,
@@ -144,71 +145,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
               >
-                <Link href={`/project/${project.id}`}>
-                  <GlassmorphismCard className="h-full group hover:shadow-2xl hover:shadow-blue-900/10">
-                    <div className="flex flex-col h-full p-5">
-                      {/* Thumbnail */}
-                      <div
-                        className="relative overflow-hidden rounded-2xl aspect-video mb-5 shadow-lg isolation-isolate"
-                        style={{ maskImage: "linear-gradient(white, white)", WebkitMaskImage: "linear-gradient(white, white)" }}
-                      >
-                        <Image
-                          src={`https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`}
-                          alt={project.video_title}
-                          width={600}
-                          height={338}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] rounded-2xl overflow-hidden z-10">
-                          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                            <Play className="ml-1 fill-white" size={28} />
-                          </div>
-                        </div>
-                        {project.duration && (
-                          <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2 py-1 rounded-md">
-                            {project.duration}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 flex flex-col">
-                        <h3 className="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors line-clamp-2 leading-tight">
-                          {project.video_title}
-                        </h3>
-                        <p className="text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed">
-                          {project.video_description}
-                        </p>
-
-                        <div className="mt-auto pt-5 border-t border-white/5 flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/10 bg-white/5 p-1">
-                              <Image
-                                src={project.client_image || "/placeholder.svg"}
-                                alt={project.client_name}
-                                width={32}
-                                height={32}
-                                className="w-full h-full object-contain rounded-full"
-                              />
-                            </div>
-                            <div className="flex flex-col">
-                              <span className="text-xs font-medium text-white">{project.client_name}</span>
-                              <span className="text-[10px] text-gray-500">{new Date(project.publish_date).toLocaleDateString()}</span>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-1">
-                            {project.category.slice(0, 2).map((cat) => (
-                              <Badge key={cat} variant="secondary" className="bg-white/5 hover:bg-white/10 text-gray-400 text-[10px] font-normal border-none">
-                                {cat}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </GlassmorphismCard>
-                </Link>
+                <ProjectCard project={project} />
               </motion.div>
             ))}
           </motion.div>

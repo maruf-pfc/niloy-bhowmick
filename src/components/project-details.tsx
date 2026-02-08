@@ -35,7 +35,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
     const embedUrl = getYouTubeEmbedUrl(project.video_link);
 
     return (
-        <div className="min-h-screen py-20 px-4">
+        <div className="min-h-screen pt-32 pb-20 px-4">
             <div className="max-w-6xl mx-auto">
                 {/* Back Button */}
                 <motion.div
@@ -47,7 +47,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                     <Button
                         asChild
                         variant="outline"
-                        className="border-gray-600 text-gray-300 hover:bg-gray-800 bg-transparent"
+                        className="pl-4 pr-6 py-2 h-auto text-sm font-medium text-blue-200 bg-blue-500/10 border border-blue-500/50 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.1)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:bg-blue-500/20 hover:text-white hover:border-blue-400 transition-all duration-300 backdrop-blur-sm group"
                     >
                         <Link href="/">
                             <ArrowLeft className="mr-2" size={16} />
