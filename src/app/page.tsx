@@ -42,17 +42,16 @@ export default function HomePage() {
     if (loading || !hasMore) return;
 
     setLoading(true);
-    setTimeout(() => {
-      const nextPage = currentPage + 1;
-      const startIndex = (nextPage - 1) * ITEMS_PER_PAGE;
-      const endIndex = startIndex + ITEMS_PER_PAGE;
-      const newProjects = allProjects.slice(startIndex, endIndex);
+    // Removed artificial delay for better performance
+    const nextPage = currentPage + 1;
+    const startIndex = (nextPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const newProjects = allProjects.slice(startIndex, endIndex);
 
-      setDisplayedProjects((prev) => [...prev, ...newProjects]);
-      setCurrentPage(nextPage);
-      setHasMore(endIndex < allProjects.length);
-      setLoading(false);
-    }, 500);
+    setDisplayedProjects((prev) => [...prev, ...newProjects]);
+    setCurrentPage(nextPage);
+    setHasMore(endIndex < allProjects.length);
+    setLoading(false);
   }, [currentPage, allProjects, loading, hasMore]);
 
   // Infinite scroll for non-"All" categories
@@ -305,7 +304,7 @@ export default function HomePage() {
                 transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
                 className="h-full"
               >
-                <GlassmorphismCard className="p-8 h-full flex flex-col items-center text-center group hover:bg-white/[0.04]">
+                <GlassmorphismCard className="p-8 h-full flex flex-col items-center text-center group hover:bg-white/[0.04] hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
                   <div className="text-5xl mb-6 bg-white/5 p-4 rounded-2xl group-hover:scale-110 transition-transform duration-300 border border-white/5">
                     {service.icon}
                   </div>
