@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import type { Metadata } from "next";
 import { Inter, Nunito } from "next/font/google";
 
@@ -156,12 +156,26 @@ export default function RootLayout({
             </FramerLazyMotion>
           </SmoothScroll>
         </div>
-        <Script
-          src={process.env.NEXT_PUBLIC_UMAMI_SRC}
-          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-          strategy="afterInteractive"
-        />
+        <AnalyticsBeacon />
       </body>
     </html>
   );
+}
+
+function AnalyticsBeacon() {
+  "use client";
+
+  React.useEffect(() => {
+    if (typeof navigator === "undefined") return;
+
+    const payload = {
+      p: window.location.pathname + window.location.search,
+      r: document.referrer,
+      t: document.title,
+    };
+
+    navigator.sendBeacon("/api/a", JSON.stringify(payload));
+  }, []);
+
+  return null;
 }
