@@ -1,10 +1,11 @@
+// components/analytics-beacon.tsx
 "use client";
 
 import { useEffect } from "react";
 
 export default function AnalyticsBeacon() {
   useEffect(() => {
-    if (typeof navigator === "undefined") return;
+    if (typeof window === "undefined") return;
 
     const payload = {
       p: window.location.pathname + window.location.search,
@@ -12,7 +13,16 @@ export default function AnalyticsBeacon() {
       t: document.title,
     };
 
-    navigator.sendBeacon("/api/a", JSON.stringify(payload));
+    console.log("📡 Sending analytics payload:", payload);
+
+    // Use fetch temporarily so we can see errors in console
+    fetch("/api/a", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => console.log("✅ Server response:", res.status))
+      .catch((err) => console.error("❌ Fetch failed:", err));
   }, []);
 
   return null;
