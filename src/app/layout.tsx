@@ -10,7 +10,7 @@ import Footer from "@/components/footer";
 import SmoothScroll from "@/components/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
 import FramerLazyMotion from "@/components/framer-lazy-motion";
-import Script from "next/script";
+import AnalyticsBeacon from "@/components/analytics-beacon";
 
 const inter = Inter({ subsets: ["latin"] });
 // const nunito = Nunito({ subsets: ["latin"] });q
@@ -160,22 +160,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
-
-function AnalyticsBeacon() {
-  "use client";
-
-  React.useEffect(() => {
-    if (typeof navigator === "undefined") return;
-
-    const payload = {
-      p: window.location.pathname + window.location.search,
-      r: document.referrer,
-      t: document.title,
-    };
-
-    navigator.sendBeacon("/api/a", JSON.stringify(payload));
-  }, []);
-
-  return null;
 }
