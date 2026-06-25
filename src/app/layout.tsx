@@ -13,7 +13,7 @@ import FramerLazyMotion from "@/components/framer-lazy-motion";
 import AnalyticsBeacon from "@/components/analytics-beacon";
 
 const inter = Inter({ subsets: ["latin"] });
-// const nunito = Nunito({ subsets: ["latin"] });q
+// const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {

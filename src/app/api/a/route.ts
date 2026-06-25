@@ -4,9 +4,6 @@ export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
-  console.log("📥 Received at /api/a:", body);
-  console.log("🔗 Target endpoint:", process.env.Analytics_API_ENDPOINT);
-  console.log("🆔 Website ID:", process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID);
 
   try {
     if (
@@ -38,12 +35,11 @@ export async function POST(req: NextRequest) {
     });
 
     const resText = await response.text();
-    console.log("📤 Umami response status:", response.status);
-    console.log("📤 Umami response body:", resText);
 
     return NextResponse.json({ ok: true, status: response.status });
-  } catch (e: any) {
-    console.error("❌ Forward failed:", e.message);
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e) {
+    const errorMessage = e instanceof Error ? e.message : String(e);
+    console.error("❌ Forward failed:", errorMessage);
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

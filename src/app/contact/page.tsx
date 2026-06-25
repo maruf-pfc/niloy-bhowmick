@@ -20,6 +20,7 @@ export default function ContactPage() {
     const message = formData.get("message") as string;
     const projectType = formData.get("project-type") as string;
     const timeline = formData.get("timeline") as string;
+    const honeypot = formData.get("honeypot") as string;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,7 +39,7 @@ export default function ContactPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, message, projectType, timeline }),
+      body: JSON.stringify({ name, email, message, projectType, timeline, honeypot }),
     });
 
     const result = await res.json();
@@ -193,6 +194,17 @@ export default function ContactPage() {
                 Send Message
               </h3>
               <form className="space-y-6" onSubmit={handleSubmit}>
+                {/* Honeypot field (hidden for spam prevention) */}
+                <div className="hidden" aria-hidden="true">
+                  <input
+                    id="honeypot"
+                    name="honeypot"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label

@@ -70,6 +70,18 @@ pnpm build
 pnpm start
 ```
 
+### Running Tests
+
+To run the unit test suite once:
+```bash
+pnpm test
+```
+
+To run tests in interactive watch mode:
+```bash
+pnpm run test:watch
+```
+
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
@@ -137,6 +149,7 @@ pnpm start
  ┃ ┃ ┗ 📜use-mobile.tsx
  ┃ ┣ 📂lib
  ┃ ┃ ┣ 📜helper.ts
+ ┃ ┃ ┣ 📜helper.test.ts
  ┃ ┃ ┗ 📜utils.ts
  ┃ ┣ 📂styles
  ┃ ┗ 📂types
@@ -155,7 +168,8 @@ pnpm start
  ┣ 📜package.json
  ┣ 📜pnpm-lock.yaml
  ┣ 📜postcss.config.mjs
- ┗ 📜tsconfig.json
+ ┣ 📜tsconfig.json
+ ┗ 📜vitest.config.ts
 ```
 
 ### 📝 Adding New Video Projects
@@ -191,6 +205,7 @@ export const videoProjectsData = {
 -   **Styling**: Tailwind CSS, Shadcn/ui
 -   **Animation**: Framer Motion
 -   **Backend**: Resend (Email), Server Actions
+-   **Testing**: Vitest (Unit testing)
 
 ---
 

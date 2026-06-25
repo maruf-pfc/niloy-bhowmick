@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { m, AnimatePresence  } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, X } from "lucide-react";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -74,20 +74,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                                         className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white p-1.5 rounded-full backdrop-blur-md transition-colors z-30"
                                         aria-label="Close preview"
                                     >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path d="M18 6 6 18" />
-                                            <path d="m6 6 18 18" />
-                                        </svg>
+                                        <X size={16} />
                                     </button>
                                 </m.div>
                             ) : (
