@@ -10,7 +10,6 @@ import Footer from "@/components/footer";
 import SmoothScroll from "@/components/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
 import FramerLazyMotion from "@/components/framer-lazy-motion";
-import AnalyticsBeacon from "@/components/analytics-beacon";
 
 const inter = Inter({ subsets: ["latin"] });
 // const nunito = Nunito({ subsets: ["latin"] });
@@ -156,7 +155,6 @@ export default function RootLayout({
             </FramerLazyMotion>
           </SmoothScroll>
         </div>
-        <AnalyticsBeacon />
       </body>
     </html>
   );
